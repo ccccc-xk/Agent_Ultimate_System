@@ -73,3 +73,5 @@ maven/
 # Screenshots (keep small ones, exclude large)
 *.png
 !02_政企物流智能化转化/frontend/screenshot.png
+
+.vercel

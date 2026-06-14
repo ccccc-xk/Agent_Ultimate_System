@@ -3,10 +3,10 @@ server:
 
 spring:
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/enterprise_base?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:123456}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/enterprise_base}
+    username: ${DB_USERNAME:agent_user}
+    password: ${DB_PASSWORD:}
+    driver-class-name: ${DB_DRIVER:org.postgresql.Driver}
 
 mybatis-plus:
   configuration:
@@ -25,5 +25,5 @@ jwt:
 
 ai:
   api-key: ${AI_API_KEY:sk-your-api-key-here}
-  api-url: ${AI_API_URL:https://api.openai.com/v1/chat/completions}
-  model: ${AI_MODEL:gpt-3.5-turbo}
+  api-url: ${AI_API_URL:https://api.deepseek.com/v1/chat/completions}
+  model: ${AI_MODEL:deepseek-chat}
