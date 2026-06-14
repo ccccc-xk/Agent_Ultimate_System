@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent 智能体合流总管 - 聊天演示</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .hero { text-align: center; padding: 40px 20px; max-width: 700px; }
+    .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    .hero p { font-size: 18px; opacity: 0.9; line-height: 1.6; margin-bottom: 24px; }
+    .hero .badge {
+      display: inline-block; background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3); border-radius: 20px;
+      padding: 6px 16px; font-size: 13px; margin-bottom: 24px;
+    }
+    .features { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
+    .feature {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px; padding: 16px; width: 130px; text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    .feature .icon { font-size: 28px; margin-bottom: 8px; }
+    .feature .label { font-size: 13px; font-weight: 500; }
+    .hint {
+      margin-top: 40px; font-size: 14px; opacity: 0.7;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+    .config-panel {
+      margin-top: 32px; background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;
+      padding: 20px 24px; max-width: 420px; width: 100%;
+    }
+    .config-panel label { display: block; font-size: 13px; margin-bottom: 4px; opacity: 0.8; }
+    .config-panel input {
+      width: 100%; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 8px; background: rgba(255,255,255,0.1); color: #fff;
+      font-size: 14px; margin-bottom: 12px; outline: none;
+    }
+    .config-panel input::placeholder { color: rgba(255,255,255,0.4); }
+    .config-panel input:focus { border-color: rgba(255,255,255,0.6); }
+    .config-panel button {
+      width: 100%; padding: 10px; background: #fff; color: #764ba2;
+      border: none; border-radius: 8px; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: transform 0.15s;
+    }
+    .config-panel button:hover { transform: scale(1.02); }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="badge">Dify Chatflow + Tool Calling</div>
+    <h1>Agent 智能体合流总管</h1>
+    <p>大白话输入 → 智能意图识别 → 自动调用工具/知识库</p>
+    <div class="features">
+      <div class="feature"><div class="icon">&#128200;</div><div class="label">财务查询</div></div>
+      <div class="feature"><div class="icon">&#128221;</div><div class="label">智能派单</div></div>
+      <div class="feature"><div class="icon">&#128218;</div><div class="label">企业知识库</div></div>
+      <div class="feature"><div class="icon">&#128138;</div><div class="label">医疗知识库</div></div>
+      <div class="feature"><div class="icon">&#128100;</div><div class="label">人工转接</div></div>
+    </div>
+    <div class="config-panel">
+      <label>API 地址</label>
+      <input type="text" id="cfg-api" placeholder="http://localhost:9006" value="http://localhost:9006">
+      <label>API Key (应用密钥)</label>
+      <input type="text" id="cfg-key" placeholder="app-xxxxxxxxxxxxxxxx">
+      <button onclick="launchWidget()">启动聊天组件</button>
+    </div>
+    <div class="hint">点击右下角按钮开始对话</div>
+  </div>
+
+  <script src="chat-widget.js"></script>
+  <script>
+    function launchWidget() {
+      var apiBase = document.getElementById('cfg-api').value.trim();
+      var apiKey = document.getElementById('cfg-key').value.trim();
+      if (!apiBase || !apiKey) { alert('请填写 API 地址和 API Key'); return; }
+      if (window.AgentChatWidget._instance) { window.AgentChatWidget.destroy(); }
+      window.AgentChatWidget.init({
+        apiBase: apiBase, apiKey: apiKey, primaryColor: '#1890ff',
+        title: '智能客服助手', subtitle: 'AI Agent 总管',
+        welcomeText: '您好！我是AI智能客服总管，可以帮您查询数据、报修派单、咨询政策、健康咨询。请问有什么需要帮助的吗？',
+        logo: '&#129302;'
+      });
+      window.AgentChatWidget.open();
+    }
+  </script>
+</body>
+</html>
