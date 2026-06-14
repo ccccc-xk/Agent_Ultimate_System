@@ -15,7 +15,7 @@
     <artifactId>smart-logistics</artifactId>
     <version>1.0.0</version>
     <name>smart-logistics</name>
-    <description>政企物流智能化转化 - 口语化派单与大白话查库</description>
+    <description>P2 Logistics System</description>
 
     <properties>
         <java.version>17</java.version>
@@ -36,16 +36,10 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
-        <!-- Redis -->
+        <!-- PostgreSQL -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
-        <!-- MySQL -->
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
 

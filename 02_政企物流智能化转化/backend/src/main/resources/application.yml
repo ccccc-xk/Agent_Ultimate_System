@@ -5,28 +5,17 @@ spring:
   application:
     name: smart-logistics
 
-  # MySQL
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/smart_logistics?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false}
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:123456}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://${DB_HOST:dpg-d8n7tncm0tmc73dr44n0-a.oregon-postgres.render.com}:${DB_PORT:5432}/${DB_NAME:smart_logistics}
+    username: ${DB_USERNAME:agent_user}
+    password: ${DB_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
 
-  # Redis
-  data:
-    redis:
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
-      database: 0
-      timeout: 3000ms
-
-  # Jackson
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
     default-property-inclusion: non_null
 
-# LangChain4j OpenAI config
 langchain4j:
   open-ai:
     chat-model:
@@ -36,10 +25,7 @@ langchain4j:
       temperature: 0.1
       max-tokens: 2000
       timeout: PT60S
-      log-requests: true
-      log-responses: true
 
-# MyBatis-Plus
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
   configuration:
@@ -52,8 +38,7 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
 
-# Logging
 logging:
   level:
-    com.logistics.smart: debug
-    dev.langchain4j: debug
+    com.logistics.smart: info
+    dev.langchain4j: info
