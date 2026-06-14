@@ -1,406 +1,113 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Agent Ultimate System - 全栈智能体生态</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-      background: #0a0a0a;
-      color: #e0e0e0;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    /* Animated background */
-    .bg-grid {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
-      background-image:
-        linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
-      background-size: 60px 60px;
-      animation: gridMove 20s linear infinite;
-    }
-    @keyframes gridMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(60px, 60px); }
-    }
-    .container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-    /* Hero */
-    .hero {
-      text-align: center; padding: 80px 0 60px;
-    }
-    .hero-badge {
-      display: inline-block; padding: 6px 16px; border-radius: 20px;
-      background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3);
-      font-size: 13px; color: #818cf8; margin-bottom: 20px;
-      letter-spacing: 0.5px;
-    }
-    .hero h1 {
-      font-size: 48px; font-weight: 800; margin-bottom: 16px;
-      background: linear-gradient(135deg, #818cf8, #c084fc, #f472b6);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero p {
-      font-size: 18px; color: #9ca3af; max-width: 600px; margin: 0 auto 32px;
-      line-height: 1.7;
-    }
-    .hero-stats {
-      display: flex; justify-content: center; gap: 48px; margin-top: 32px;
-    }
-    .hero-stat .num {
-      font-size: 36px; font-weight: 800;
-      background: linear-gradient(135deg, #818cf8, #c084fc);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-stat .label { font-size: 13px; color: #6b7280; margin-top: 4px; }
-
-    /* Architecture */
-    .arch-section { padding: 40px 0; }
-    .arch-section h2 {
-      text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 40px; color: #f0f0f0;
-    }
-    .arch-flow {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      flex-wrap: wrap; margin-bottom: 40px;
-    }
-    .arch-node {
-      padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 600;
-      text-align: center; min-width: 100px;
-    }
-    .arch-user { background: rgba(99,102,241,0.2); border: 1px solid rgba(99,102,241,0.4); color: #818cf8; }
-    .arch-agent { background: rgba(192,132,252,0.2); border: 1px solid rgba(192,132,252,0.4); color: #c084fc; }
-    .arch-service { background: rgba(244,114,182,0.2); border: 1px solid rgba(244,114,182,0.4); color: #f472b6; }
-    .arch-db { background: rgba(52,211,153,0.2); border: 1px solid rgba(52,211,153,0.4); color: #34d399; }
-    .arch-arrow { color: #4b5563; font-size: 20px; }
-
-    /* Projects Grid */
-    .projects-section { padding: 40px 0 60px; }
-    .projects-section h2 {
-      text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 40px; color: #f0f0f0;
-    }
-    .projects-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px;
-    }
-    .project-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px; padding: 28px;
-      transition: all 0.3s ease;
-      position: relative; overflow: hidden;
-    }
-    .project-card:hover {
-      border-color: rgba(99,102,241,0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-    .project-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      border-radius: 16px 16px 0 0;
-    }
-    .project-card:nth-child(1)::before { background: linear-gradient(90deg, #818cf8, #6366f1); }
-    .project-card:nth-child(2)::before { background: linear-gradient(90deg, #c084fc, #a855f7); }
-    .project-card:nth-child(3)::before { background: linear-gradient(90deg, #34d399, #10b981); }
-    .project-card:nth-child(4)::before { background: linear-gradient(90deg, #f472b6, #ec4899); }
-    .project-card:nth-child(5)::before { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
-    .project-card:nth-child(6)::before { background: linear-gradient(90deg, #60a5fa, #3b82f6); }
-    .project-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .project-icon {
-      width: 44px; height: 44px; border-radius: 12px; display: flex;
-      align-items: center; justify-content: center; font-size: 22px;
-      flex-shrink: 0;
-    }
-    .project-card:nth-child(1) .project-icon { background: rgba(99,102,241,0.15); }
-    .project-card:nth-child(2) .project-icon { background: rgba(192,132,252,0.15); }
-    .project-card:nth-child(3) .project-icon { background: rgba(52,211,153,0.15); }
-    .project-card:nth-child(4) .project-icon { background: rgba(244,114,182,0.15); }
-    .project-card:nth-child(5) .project-icon { background: rgba(251,191,36,0.15); }
-    .project-card:nth-child(6) .project-icon { background: rgba(96,165,250,0.15); }
-    .project-name { font-size: 18px; font-weight: 700; color: #f0f0f0; }
-    .project-tag {
-      display: inline-block; padding: 2px 8px; border-radius: 6px;
-      font-size: 11px; font-weight: 600; margin-left: 8px;
-    }
-    .tag-live { background: rgba(52,211,153,0.2); color: #34d399; }
-    .tag-api { background: rgba(99,102,241,0.2); color: #818cf8; }
-    .tag-agent { background: rgba(244,114,182,0.2); color: #f472b6; }
-    .project-desc { font-size: 14px; color: #9ca3af; line-height: 1.6; margin: 12px 0 16px; }
-    .project-tech {
-      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px;
-    }
-    .tech-tag {
-      padding: 3px 10px; border-radius: 6px; font-size: 11px;
-      background: rgba(255,255,255,0.06); color: #9ca3af;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .project-features {
-      list-style: none; margin-bottom: 16px;
-    }
-    .project-features li {
-      font-size: 13px; color: #6b7280; padding: 3px 0;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .project-features li::before {
-      content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: #4b5563; flex-shrink: 0;
-    }
-    .project-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
-      text-decoration: none; transition: all 0.2s;
-    }
-    .link-primary {
-      background: rgba(99,102,241,0.15); color: #818cf8;
-      border: 1px solid rgba(99,102,241,0.3);
-    }
-    .link-primary:hover { background: rgba(99,102,241,0.25); }
-
-    /* CTA Section */
-    .cta-section {
-      text-align: center; padding: 60px 0 80px;
-    }
-    .cta-section h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #f0f0f0; }
-    .cta-section p { font-size: 15px; color: #6b7280; margin-bottom: 28px; }
-    .cta-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 32px; border-radius: 12px; font-size: 16px; font-weight: 700;
-      text-decoration: none; transition: all 0.3s;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: #fff; border: none; cursor: pointer;
-    }
-    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(99,102,241,0.3); }
-
-    /* Footer */
-    .footer {
-      text-align: center; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.06);
-      font-size: 13px; color: #4b5563;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 32px; }
-      .hero-stats { gap: 24px; }
-      .hero-stat .num { font-size: 24px; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .arch-flow { flex-direction: column; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Ultimate System</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif;background:#0f0f1a;color:#e0e0e0;min-height:100vh}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.hero{text-align:center;padding:60px 0 40px}
+.badge{display:inline-block;padding:5px 14px;border-radius:16px;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3);font-size:12px;color:#818cf8;margin-bottom:16px}
+h1{font-size:42px;font-weight:800;color:#fff;margin-bottom:12px}
+h1 em{font-style:normal;color:#818cf8}
+.sub{font-size:16px;color:#9ca3af;max-width:560px;margin:0 auto 28px;line-height:1.7}
+.stats{display:flex;justify-content:center;gap:40px;margin-top:24px}
+.stat-n{font-size:32px;font-weight:800;color:#818cf8}
+.stat-l{font-size:12px;color:#6b7280;margin-top:2px}
+h2{font-size:24px;font-weight:700;color:#fff;text-align:center;padding:30px 0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;padding-bottom:40px}
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:24px;transition:all .25s}
+.card:hover{border-color:rgba(99,102,241,.3);transform:translateY(-3px);box-shadow:0 16px 32px rgba(0,0,0,.3)}
+.card-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.card-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(99,102,241,.12)}
+.card-name{font-size:16px;font-weight:700;color:#f0f0f0}
+.tag{display:inline-block;padding:2px 7px;border-radius:5px;font-size:10px;font-weight:600;margin-left:6px;background:rgba(52,211,153,.2);color:#34d399}
+.tag2{background:rgba(99,102,241,.2);color:#818cf8}
+.tag3{background:rgba(244,114,182,.2);color:#f472b6}
+.card-desc{font-size:13px;color:#9ca3af;line-height:1.6;margin:8px 0 12px}
+.tech{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.tech span{padding:2px 8px;border-radius:5px;font-size:10px;background:rgba(255,255,255,.05);color:#9ca3af;border:1px solid rgba(255,255,255,.07)}
+.card ul{list-style:none;margin-bottom:14px}
+.card li{font-size:12px;color:#6b7280;padding:2px 0}
+.card li::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#4b5563;margin-right:8px}
+.btn{display:inline-block;padding:7px 14px;border-radius:7px;font-size:12px;font-weight:600;text-decoration:none;background:rgba(99,102,241,.12);color:#818cf8;border:1px solid rgba(99,102,241,.25);transition:all .2s}
+.btn:hover{background:rgba(99,102,241,.22)}
+.cta{text-align:center;padding:40px 0 60px}
+.cta-btn{display:inline-block;padding:12px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;cursor:pointer;transition:all .25s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(99,102,241,.3)}
+.foot{text-align:center;padding:20px 0;border-top:1px solid rgba(255,255,255,.06);font-size:12px;color:#4b5563}
+@media(max-width:700px){h1{font-size:28px}.stats{gap:20px}.stat-n{font-size:22px}.grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="container">
-
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-badge">Dify Agent + DeepSeek LLM + Tool Calling</div>
-      <h1>AI Agent Ultimate System</h1>
-      <p>六个子系统从传统业务到 AI 智能体的完整技术闭环 —— 大白话输入、智能意图识别、自动调用工具</p>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="num">6</div><div class="label">子系统</div></div>
-        <div class="hero-stat"><div class="num">5</div><div class="label">意图路由</div></div>
-        <div class="hero-stat"><div class="num">4</div><div class="label">API 工具</div></div>
-      </div>
-    </section>
-
-    <!-- Architecture -->
-    <section class="arch-section">
-      <h2>系统架构</h2>
-      <div class="arch-flow">
-        <div class="arch-node arch-user">用户输入</div>
-        <span class="arch-arrow">&rarr;</span>
-        <div class="arch-node arch-agent">Dify Agent</div>
-        <span class="arch-arrow">&rarr;</span>
-        <div class="arch-node arch-agent">意图识别</div>
-        <span class="arch-arrow">&rarr;</span>
-        <div class="arch-node arch-service">工具调用</div>
-        <span class="arch-arrow">&rarr;</span>
-        <div class="arch-node arch-db">数据库</div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section class="projects-section">
-      <h2>六大子系统</h2>
-      <div class="projects-grid">
-
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">🏢</div>
-            <div>
-              <span class="project-name">企业管理基座</span>
-              <span class="project-tag tag-live">前端已部署</span>
-            </div>
-          </div>
-          <div class="project-desc">传统企业管理系统后台，提供 RBAC 权限管理、财务报表 CRUD、AI 智能财务摘要、Excel 导入导出。</div>
-          <div class="project-tech">
-            <span class="tech-tag">Spring Boot 3.2</span>
-            <span class="tech-tag">Vue 3</span>
-            <span class="tech-tag">Element Plus</span>
-            <span class="tech-tag">MySQL</span>
-            <span class="tech-tag">JWT</span>
-          </div>
-          <ul class="project-features">
-            <li>RBAC 权限管理（用户/角色/菜单）</li>
-            <li>财务数据 CRUD + AI 摘要</li>
-            <li>Excel 批量导入导出</li>
-          </ul>
-          <a class="project-link link-primary" id="link-p01" href="#">访问前端 &rarr;</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">🚚</div>
-            <div>
-              <span class="project-name">政企物流智能化</span>
-              <span class="project-tag tag-live">前端已部署</span>
-            </div>
-          </div>
-          <div class="project-desc">让传统业务接口"听懂大白话" —— 口语化自动派单、自然语言查数据库、工单全流程管理。</div>
-          <div class="project-tech">
-            <span class="tech-tag">Spring Boot 3.2</span>
-            <span class="tech-tag">Vue 3</span>
-            <span class="tech-tag">LangChain4j</span>
-            <span class="tech-tag">MySQL</span>
-          </div>
-          <ul class="project-features">
-            <li>NLP 智能派单（描述故障自动建单）</li>
-            <li>自然语言查数据库（LLM 转 SQL）</li>
-            <li>工单状态全流程管理</li>
-          </ul>
-          <a class="project-link link-primary" id="link-p02" href="#">访问前端 &rarr;</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">🧠</div>
-            <div>
-              <span class="project-name">垂直领域模型微调</span>
-              <span class="project-tag tag-api">训练数据</span>
-            </div>
-          </div>
-          <div class="project-desc">原计划 SFT 微调，因 GPU 不足改为 Ollama + DeepSeek API 替代。训练数据和脚本保留备用。</div>
-          <div class="project-tech">
-            <span class="tech-tag">LoRA SFT</span>
-            <span class="tech-tag">Qwen2.5</span>
-            <span class="tech-tag">DeepSeek</span>
-            <span class="tech-tag">Ollama</span>
-          </div>
-          <ul class="project-features">
-            <li>训练数据生成 + 清洗脚本</li>
-            <li>LoRA 微调配置（备用）</li>
-            <li>模型验证 + Benchmark</li>
-          </ul>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">💊</div>
-            <div>
-              <span class="project-name">医疗智能问诊 RAG</span>
-              <span class="project-tag tag-api">API 服务</span>
-            </div>
-          </div>
-          <div class="project-desc">基于 Milvus 向量检索的医疗知识库。输入疾病/症状/药物问题，从医疗文档中检索并生成专业回答。</div>
-          <div class="project-tech">
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">Milvus</span>
-            <span class="tech-tag">BGE Embedding</span>
-            <span class="tech-tag">LangChain</span>
-          </div>
-          <ul class="project-features">
-            <li>医疗文档上传 + 向量化</li>
-            <li>语义检索 + LLM 生成回答</li>
-            <li>SSE 流式输出</li>
-          </ul>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">📚</div>
-            <div>
-              <span class="project-name">企业级高级 RAG</span>
-              <span class="project-tag tag-api">API 服务</span>
-            </div>
-          </div>
-          <div class="project-desc">混合检索（BM25 + 向量）+ Rerank 重排 + 上下文压缩，企业知识库的高精度问答方案。</div>
-          <div class="project-tech">
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">ES + Milvus</span>
-            <span class="tech-tag">Reranker</span>
-            <span class="tech-tag">Hybrid Search</span>
-          </div>
-          <ul class="project-features">
-            <li>BM25 + 向量混合检索</li>
-            <li>BGE Reranker 重排序</li>
-            <li>上下文压缩 + 多轮对话</li>
-          </ul>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">🤖</div>
-            <div>
-              <span class="project-name">Agent 智能体总管</span>
-              <span class="project-tag tag-agent">核心引擎</span>
-            </div>
-          </div>
-          <div class="project-desc">压轴项目 —— 将所有子系统串联为一个智能体闭环。大白话输入，自动路由到正确的服务。</div>
-          <div class="project-tech">
-            <span class="tech-tag">Dify</span>
-            <span class="tech-tag">DeepSeek</span>
-            <span class="tech-tag">Tool Calling</span>
-            <span class="tech-tag">SSE</span>
-          </div>
-          <ul class="project-features">
-            <li>五路意图路由（数据/知识/派单/医疗/人工）</li>
-            <li>参数补全 + 多轮对话</li>
-            <li>可嵌入任意网页的聊天组件</li>
-          </ul>
-          <a class="project-link link-primary" id="link-p06" href="#">体验 Agent &rarr;</a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta-section">
-      <h2>开始体验</h2>
-      <p>点击下方按钮打开 Agent 聊天界面，试试用自然语言与系统对话</p>
-      <a class="cta-btn" id="cta-chat" href="#">
-        <span>🤖</span> 打开智能客服
-      </a>
-    </section>
-
-    <footer class="footer">
-      AI Agent Ultimate System &copy; 2025 &mdash; Powered by Dify + DeepSeek + Cloudflare/Vercel
-    </footer>
+<div class="wrap">
+  <section class="hero">
+    <div class="badge">Dify Agent + DeepSeek LLM + Tool Calling</div>
+    <h1>AI Agent <em>Ultimate System</em></h1>
+    <p class="sub">六个子系统，从传统业务到 AI 智能体的完整技术闭环 —— 大白话输入、智能意图识别、自动调用工具</p>
+    <div class="stats">
+      <div><div class="stat-n">6</div><div class="stat-l">子系统</div></div>
+      <div><div class="stat-n">5</div><div class="stat-l">意图路由</div></div>
+      <div><div class="stat-n">4</div><div class="stat-l">API 工具</div></div>
+    </div>
+  </section>
+  <h2>六大子系统</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-top"><div class="card-icon">&#127970;</div><span class="card-name">企业管理基座</span><span class="tag">前端已部署</span></div>
+      <p class="card-desc">传统企业管理系统后台，RBAC 权限管理、财务报表 CRUD、AI 智能财务摘要、Excel 导入导出。</p>
+      <div class="tech"><span>Spring Boot 3.2</span><span>Vue 3</span><span>Element Plus</span><span>PostgreSQL</span></div>
+      <ul><li>RBAC 权限管理（用户/角色/菜单）</li><li>财务数据 CRUD + AI 摘要</li><li>Excel 批量导入导出</li></ul>
+      <a class="btn" id="link1" href="#">访问前端 &rarr;</a>
+    </div>
+    <div class="card">
+      <div class="card-top"><div class="card-icon">&#128666;</div><span class="card-name">政企物流智能化</span><span class="tag">前端已部署</span></div>
+      <p class="card-desc">让传统业务接口"听懂大白话" —— 口语化自动派单、自然语言查数据库、工单全流程管理。</p>
+      <div class="tech"><span>Spring Boot 3.2</span><span>Vue 3</span><span>LangChain4j</span><span>PostgreSQL</span></div>
+      <ul><li>NLP 智能派单（描述故障自动建单）</li><li>自然语言查数据库（LLM 转 SQL）</li><li>工单状态全流程管理</li></ul>
+      <a class="btn" id="link2" href="#">访问前端 &rarr;</a>
+    </div>
+    <div class="card">
+      <div class="card-top"><div class="card-icon">&#129504;</div><span class="card-name">垂直领域模型微调</span><span class="tag tag2">训练数据</span></div>
+      <p class="card-desc">原计划 SFT 微调，因 GPU 不足改为 Ollama + DeepSeek API 替代。训练数据和脚本保留备用。</p>
+      <div class="tech"><span>LoRA SFT</span><span>Qwen2.5</span><span>DeepSeek</span><span>Ollama</span></div>
+      <ul><li>训练数据生成 + 清洗脚本</li><li>LoRA 微调配置（备用）</li><li>模型验证 + Benchmark</li></ul>
+    </div>
+    <div class="card">
+      <div class="card-top"><div class="card-icon">&#128138;</div><span class="card-name">医疗智能问诊 RAG</span><span class="tag tag2">API 服务</span></div>
+      <p class="card-desc">基于 Milvus 向量检索的医疗知识库。输入疾病/症状/药物问题，检索并生成专业回答。</p>
+      <div class="tech"><span>FastAPI</span><span>Milvus</span><span>BGE Embedding</span><span>LangChain</span></div>
+      <ul><li>医疗文档上传 + 向量化</li><li>语义检索 + LLM 生成回答</li><li>SSE 流式输出</li></ul>
+    </div>
+    <div class="card">
+      <div class="card-top"><div class="card-icon">&#128218;</div><span class="card-name">企业级高级 RAG</span><span class="tag tag2">API 服务</span></div>
+      <p class="card-desc">混合检索（BM25 + 向量）+ Rerank 重排 + 上下文压缩，企业知识库高精度问答方案。</p>
+      <div class="tech"><span>FastAPI</span><span>ES + Milvus</span><span>Reranker</span><span>Hybrid Search</span></div>
+      <ul><li>BM25 + 向量混合检索</li><li>BGE Reranker 重排序</li><li>上下文压缩 + 多轮对话</li></ul>
+    </div>
+    <div class="card">
+      <div class="card-top"><div class="card-icon">&#129302;</div><span class="card-name">Agent 智能体总管</span><span class="tag tag3">核心引擎</span></div>
+      <p class="card-desc">压轴项目 —— 将所有子系统串联为智能体闭环。大白话输入，自动路由到正确的服务。</p>
+      <div class="tech"><span>Dify</span><span>DeepSeek</span><span>Tool Calling</span><span>SSE</span></div>
+      <ul><li>五路意图路由</li><li>参数补全 + 多轮对话</li><li>可嵌入任意网页的聊天组件</li></ul>
+      <a class="btn" id="link6" href="#">体验 Agent &rarr;</a>
+    </div>
   </div>
-
-  <script>
-    // Configure links from environment or defaults
-    // These will be set by the deployment configuration
-    const config = {
-      p01Frontend: window.__P01_FRONTEND_URL__ || '#',
-      p02Frontend: window.__P02_FRONTEND_URL__ || '#',
-      p06Demo: window.__P06_DEMO_URL__ || '#',
-    };
-
-    document.getElementById('link-p01').href = config.p01Frontend;
-    document.getElementById('link-p02').href = config.p02Frontend;
-    document.getElementById('link-p06').href = config.p06Demo;
-    document.getElementById('cta-chat').href = config.p06Demo;
-
-    // If no URLs configured, show placeholder
-    if (config.p06Demo === '#') {
-      document.getElementById('cta-chat').addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('请先配置前端部署 URL。编辑 index.html 中的 config 对象，或设置环境变量。');
-      });
-    }
-  </script>
+  <section class="cta">
+    <h2>开始体验</h2>
+    <p style="font-size:14px;color:#6b7280;margin-bottom:20px">点击打开 Agent 聊天界面，用自然语言与系统对话</p>
+    <a class="cta-btn" id="cta" href="#">&#129302; 打开智能客服</a>
+  </section>
+  <footer class="foot">AI Agent Ultimate System &copy; 2025 &mdash; Powered by Dify + DeepSeek + Vercel + Render</footer>
+</div>
+<script>
+var c={p1:window.__P01_URL__||"#",p2:window.__P02_URL__||"#",p6:window.__P06_URL__||"#"};
+document.getElementById("link1").href=c.p1;
+document.getElementById("link2").href=c.p2;
+document.getElementById("link6").href=c.p6;
+document.getElementById("cta").href=c.p6;
+</script>
 </body>
 </html>
