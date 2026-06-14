@@ -1,0 +1,15 @@
+FROM eclipse-temurin:17-jdk-jammy
+
+WORKDIR /app
+
+# Copy P02 backend source
+COPY "02_政企物流智能化转化/backend/pom.xml" ./
+COPY "02_政企物流智能化转化/backend/src" ./src
+
+# Build
+RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
+RUN mvn clean package -DskipTests
+
+EXPOSE 9002
+
+CMD ["java", "-jar", "target/smart-logistics-1.0.0.jar"]
