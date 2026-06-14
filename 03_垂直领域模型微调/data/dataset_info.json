@@ -1,0 +1,10 @@
+{
+  "vertical_sft": {
+    "file_name": "cleaned/train_final.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  }
+}

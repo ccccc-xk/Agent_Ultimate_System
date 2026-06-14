@@ -1,0 +1,160 @@
+﻿{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "企业级高级RAG知识库 API - Dify 工具集",
+    "description": "项目五：基于混合检索+Rerank的企业知识库查询接口",
+    "version": "1.0.0",
+    "contact": {
+      "name": "系统管理员",
+      "email": "admin@enterprise.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://host.docker.internal:9005",
+      "description": "Docker 宿主机 - 项目五 RAG 后端"
+    },
+    {
+      "url": "http://localhost:9005",
+      "description": "本地直接访问"
+    }
+  ],
+  "paths": {
+    "/api/rag/query": {
+      "post": {
+        "operationId": "rag_knowledge_query",
+        "summary": "企业知识库查询",
+        "description": "查询企业知识库，基于 ES+Milvus 混合检索+Rerank 的高质量文档问答。当用户咨询公司规章制度、员工福利政策、合同管理流程、退货退款政策等知识性问题时使用此工具。返回的答案严格基于企业内部文档，包含引用来源和置信度。仅当返回的 confidence > 0.5 时才基于内容回答，否则告知用户未找到确切信息。",
+        "requestBody": {
+          "required": true,
+          "description": "查询请求",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["question"],
+                "properties": {
+                  "question": {
+                    "type": "string",
+                    "description": "用户的知识性问题",
+                    "examples": ["员工年假有几天？", "退货流程是什么？", "合同到期如何续签？"]
+                  },
+                  "top_k": {
+                    "type": "integer",
+                    "description": "返回的相关文档片段数量，默认3",
+                    "default": 3,
+                    "minimum": 1,
+                    "maximum": 10
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string",
+                      "description": "基于文档生成的回答"
+                    },
+                    "sources": {
+                      "type": "array",
+                      "description": "引用的文档来源",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "doc_name": {
+                            "type": "string",
+                            "description": "文档名称"
+                          },
+                          "chunk_text": {
+                            "type": "string",
+                            "description": "匹配的文本片段"
+                          },
+                          "score": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "相关性评分"
+                          }
+                        }
+                      }
+                    },
+                    "confidence": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "整体置信度 (0-1)，> 0.5 为可信"
+                    },
+                    "tokens_used": {
+                      "type": "integer",
+                      "description": "消耗的Token数"
+                    },
+                    "elapsed_ms": {
+                      "type": "integer",
+                      "description": "查询耗时（毫秒）"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "查询失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rag/health": {
+      "get": {
+        "operationId": "rag_health_check",
+        "summary": "RAG服务健康检查",
+        "description": "检查 RAG 系统各组件（Elasticsearch、Milvus、Reranker）的运行状态。用于验证知识库服务是否可用。",
+        "responses": {
+          "200": {
+            "description": "健康状态",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": ["healthy", "degraded", "unhealthy"],
+                      "description": "整体健康状态"
+                    },
+                    "services": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "status": { "type": "string" },
+                          "detail": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

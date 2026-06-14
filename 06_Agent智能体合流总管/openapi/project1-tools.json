@@ -1,0 +1,231 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "企业管理基座系统 API - Dify 工具集",
+    "description": "项目一：企业管理系统提供的财务查询、AI摘要、用户搜索工具",
+    "version": "1.0.0",
+    "contact": {
+      "name": "系统管理员",
+      "email": "admin@enterprise.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://host.docker.internal:9001",
+      "description": "Docker 宿主机 - 项目一后端"
+    },
+    {
+      "url": "http://localhost:9001",
+      "description": "本地直接访问"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/api/finance/page": {
+      "get": {
+        "operationId": "finance_report_query",
+        "summary": "查询企业财务月报",
+        "description": "查询指定月份的企业财务数据，包括收入、支出、利润等财务报表信息。当用户要求查看财务数据、财务报表、收支情况时使用此工具。",
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "required": true,
+            "description": "查询月份，格式为 YYYY-MM，例如 2026-03",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}$",
+              "examples": ["2026-03"]
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "description": "页码，默认第1页",
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "每页条数，默认10条",
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "integer", "example": 200 },
+                    "msg": { "type": "string", "example": "success" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "records": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": { "type": "integer" },
+                              "month": { "type": "string", "description": "月份" },
+                              "revenue": { "type": "number", "description": "营业收入" },
+                              "cost": { "type": "number", "description": "营业成本" },
+                              "profit": { "type": "number", "description": "利润" },
+                              "description": { "type": "string", "description": "备注" }
+                            }
+                          }
+                        },
+                        "total": { "type": "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/finance/ai-summary": {
+      "post": {
+        "operationId": "finance_ai_summary",
+        "summary": "AI智能财务摘要",
+        "description": "调用AI自动生成指定月份的财务摘要分析报告，包含收入趋势、成本分析、利润变化等智能分析。当用户要求财务分析、财务总结、财务摘要时使用此工具。",
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "required": true,
+            "description": "分析月份，格式为 YYYY-MM，例如 2026-03",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "摘要生成成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "integer", "example": 200 },
+                    "msg": { "type": "string", "example": "success" },
+                    "data": { "type": "string", "description": "AI生成的财务摘要文本" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/page": {
+      "get": {
+        "operationId": "user_search",
+        "summary": "搜索用户信息",
+        "description": "按关键词搜索企业用户信息，支持按姓名、手机号、邮箱模糊搜索。当用户要查找某个人的信息、联系方式时使用此工具。",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "description": "搜索关键词（姓名、手机号、邮箱均可）",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "description": "页码，默认第1页",
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "每页条数，默认10条",
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "integer", "example": 200 },
+                    "msg": { "type": "string", "example": "success" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "records": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": { "type": "integer" },
+                              "username": { "type": "string", "description": "用户名" },
+                              "realName": { "type": "string", "description": "真实姓名" },
+                              "phone": { "type": "string", "description": "手机号" },
+                              "email": { "type": "string", "description": "邮箱" },
+                              "roleName": { "type": "string", "description": "角色" }
+                            }
+                          }
+                        },
+                        "total": { "type": "integer" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT Token。获取方式：POST http://host.docker.internal:9001/api/auth/login，请求体 {username, password}，返回 data 字段即为 token。Token 有效期 24 小时，过期后需重新获取。"
+      }
+    }
+  }
+}

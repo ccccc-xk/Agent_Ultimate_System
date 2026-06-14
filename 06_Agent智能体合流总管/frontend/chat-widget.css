@@ -1,0 +1,342 @@
+/* ============================================================
+   Agent Chat Widget — CSS
+   嵌入式智能客服聊天组件样式
+   ============================================================ */
+
+:root {
+  --agent-primary: #1890ff;
+  --agent-primary-dark: #096dd9;
+  --agent-primary-light: #e6f7ff;
+  --agent-bg: #ffffff;
+  --agent-bg-secondary: #f5f5f5;
+  --agent-text: #333333;
+  --agent-text-secondary: #888888;
+  --agent-border: #e8e8e8;
+  --agent-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
+  --agent-radius: 12px;
+  --agent-bubble-radius: 18px;
+  --agent-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+/* ---- 触发按钮 ---- */
+.agent-chat-trigger {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--agent-primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(24, 144, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 99999;
+  font-size: 24px;
+}
+.agent-chat-trigger:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(24, 144, 255, 0.5);
+}
+.agent-chat-trigger svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+
+/* ---- 主容器 ---- */
+.agent-chat-container {
+  position: fixed;
+  bottom: 92px;
+  right: 24px;
+  width: 400px;
+  height: 580px;
+  max-height: calc(100vh - 120px);
+  background: var(--agent-bg);
+  border-radius: var(--agent-radius);
+  box-shadow: var(--agent-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 99998;
+  font-family: var(--agent-font-family);
+  color: var(--agent-text);
+  transform-origin: bottom right;
+  transition: opacity 0.25s, transform 0.25s;
+  opacity: 0;
+  transform: scale(0.9) translateY(20px);
+  pointer-events: none;
+}
+.agent-chat-container.open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+/* ---- 头部 ---- */
+.agent-chat-header {
+  padding: 16px 20px;
+  background: var(--agent-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.agent-chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.agent-chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.agent-chat-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+.agent-chat-subtitle {
+  font-size: 11px;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+.agent-chat-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  font-size: 20px;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+.agent-chat-close:hover {
+  color: #fff;
+}
+
+/* ---- 消息区域 ---- */
+.agent-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--agent-bg-secondary);
+}
+.agent-chat-messages::-webkit-scrollbar {
+  width: 4px;
+}
+.agent-chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+/* ---- 消息气泡 ---- */
+.agent-msg {
+  display: flex;
+  gap: 8px;
+  max-width: 85%;
+  animation: agent-fade-in 0.3s ease;
+}
+.agent-msg.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+.agent-msg.assistant {
+  align-self: flex-start;
+}
+.agent-msg-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.agent-msg.user .agent-msg-avatar {
+  background: var(--agent-primary);
+  color: #fff;
+}
+.agent-msg.assistant .agent-msg-avatar {
+  background: #f0f0f0;
+  color: #666;
+}
+.agent-msg-bubble {
+  padding: 10px 14px;
+  border-radius: var(--agent-bubble-radius);
+  font-size: 14px;
+  line-height: 1.6;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+.agent-msg.user .agent-msg-bubble {
+  background: var(--agent-primary);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.agent-msg.assistant .agent-msg-bubble {
+  background: #fff;
+  color: var(--agent-text);
+  border: 1px solid var(--agent-border);
+  border-bottom-left-radius: 4px;
+}
+
+/* ---- 打字指示器 ---- */
+.agent-typing {
+  display: flex;
+  gap: 4px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid var(--agent-border);
+  border-radius: var(--agent-bubble-radius);
+  border-bottom-left-radius: 4px;
+  width: fit-content;
+}
+.agent-typing span {
+  width: 6px;
+  height: 6px;
+  background: #bbb;
+  border-radius: 50%;
+  animation: agent-typing-bounce 1.4s infinite both;
+}
+.agent-typing span:nth-child(2) { animation-delay: 0.2s; }
+.agent-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes agent-typing-bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes agent-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- 输入区域 ---- */
+.agent-chat-input-area {
+  padding: 12px 16px;
+  border-top: 1px solid var(--agent-border);
+  background: var(--agent-bg);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.agent-chat-input {
+  flex: 1;
+  border: 1px solid var(--agent-border);
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-family: var(--agent-font-family);
+  resize: none;
+  outline: none;
+  max-height: 100px;
+  min-height: 40px;
+  line-height: 1.4;
+  transition: border-color 0.2s;
+}
+.agent-chat-input:focus {
+  border-color: var(--agent-primary);
+}
+.agent-chat-send {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--agent-primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, transform 0.15s;
+}
+.agent-chat-send:hover {
+  background: var(--agent-primary-dark);
+}
+.agent-chat-send:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+.agent-chat-send svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* ---- 时间标记 ---- */
+.agent-msg-time {
+  font-size: 11px;
+  color: var(--agent-text-secondary);
+  text-align: center;
+  padding: 4px 0;
+}
+
+/* ---- 欢迎语 ---- */
+.agent-welcome {
+  text-align: center;
+  padding: 20px 16px;
+  color: var(--agent-text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.agent-welcome-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--agent-text);
+  margin-bottom: 8px;
+}
+.agent-welcome-hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.agent-welcome-hint {
+  background: var(--agent-bg);
+  border: 1px solid var(--agent-border);
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: var(--agent-primary);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.agent-welcome-hint:hover {
+  background: var(--agent-primary-light);
+  border-color: var(--agent-primary);
+}
+
+/* ---- 响应式 ---- */
+@media (max-width: 480px) {
+  .agent-chat-container {
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  .agent-chat-trigger {
+    bottom: 16px;
+    right: 16px;
+  }
+}

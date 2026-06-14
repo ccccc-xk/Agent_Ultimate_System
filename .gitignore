@@ -1,0 +1,75 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.mvn/wrapper/maven-wrapper.jar
+
+# Build outputs
+dist/
+build/
+target/
+*.jar
+*.war
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+backend.log
+stdout.log
+stderr.log
+dev.log
+run.log
+frontend.log
+docker-pull.log
+docker-xinference.log
+
+# Environment (sensitive)
+.env
+.env.local
+.env.*.local
+
+# App config (Codex internal)
+.config/
+
+# Cache
+.cache/
+*.db
+*.db-shm
+*.db-wal
+*.cache
+
+# Temp
+temp/
+uploads/
+huggingface/
+
+# Model files (too large for git)
+models/
+*.bin
+*.safetensors
+*.gguf
+
+# Data (keep markdown docs, exclude binary data)
+*.xlsx
+*.csv
+
+# Maven (bundled)
+maven/
+
+# Screenshots (keep small ones, exclude large)
+*.png
+!02_政企物流智能化转化/frontend/screenshot.png

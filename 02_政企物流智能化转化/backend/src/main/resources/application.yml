@@ -1,0 +1,59 @@
+server:
+  port: ${PORT:9002}
+
+spring:
+  application:
+    name: smart-logistics
+
+  # MySQL
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/smart_logistics?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Redis
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      database: 0
+      timeout: 3000ms
+
+  # Jackson
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    default-property-inclusion: non_null
+
+# LangChain4j OpenAI config
+langchain4j:
+  open-ai:
+    chat-model:
+      api-key: ${LLM_API_KEY:tp-c0r0k8zxpuchf6ce2q4fh3hsvjzss58rz0e28dp6khyvcjhy}
+      base-url: ${LLM_BASE_URL:https://token-plan-cn.xiaomimimo.com/v1}
+      model-name: ${LLM_MODEL:mimo-v2.5-pro}
+      temperature: 0.1
+      max-tokens: 2000
+      timeout: PT60S
+      log-requests: true
+      log-responses: true
+
+# MyBatis-Plus
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# Logging
+logging:
+  level:
+    com.logistics.smart: debug
+    dev.langchain4j: debug

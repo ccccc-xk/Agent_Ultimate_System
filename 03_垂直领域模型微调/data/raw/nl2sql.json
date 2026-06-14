@@ -1,0 +1,302 @@
+[
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下所有已付款的订单",
+    "output": "SELECT id, total_amount FROM orders WHERE status = '已付款';"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "今年新入职的员工有多少",
+    "output": "SELECT COUNT(*) AS new_hires FROM employees WHERE hire_date >= DATE_FORMAT(CURDATE(), '%Y-01-01');"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下价格超过1000的产品",
+    "output": "SELECT name, price FROM products WHERE price > 1000 ORDER BY price DESC;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "上海地区的客户有多少",
+    "output": "SELECT COUNT(*) AS shanghai_customers FROM customers WHERE city = '上海';"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月退货的订单",
+    "output": "SELECT id, total_amount, created_at FROM orders WHERE status = '已退货' AND DATE_FORMAT(created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m');"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "每个供应商的产品数量",
+    "output": "SELECT supplier, COUNT(*) AS product_count FROM products GROUP BY supplier ORDER BY product_count DESC;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下年薪超过20万的员工",
+    "output": "SELECT name, salary, position FROM employees WHERE salary > 200000;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "每个城市的平均订单金额",
+    "output": "SELECT c.city, AVG(o.total_amount) AS avg_amount FROM orders o JOIN customers c ON o.customer_id = c.id GROUP BY c.city ORDER BY avg_amount DESC;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下销量最好的产品类别",
+    "output": "SELECT p.category, SUM(o.quantity) AS total_sold FROM orders o JOIN products p ON o.product_id = p.id GROUP BY p.category ORDER BY total_sold DESC LIMIT 1;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "客户等级分布情况",
+    "output": "SELECT level, COUNT(*) AS cnt FROM customers GROUP BY level ORDER BY cnt DESC;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下本月的订单总额",
+    "output": "SELECT SUM(total_amount) AS month_total FROM orders WHERE YEAR(created_at) = YEAR(CURDATE()) AND MONTH(created_at) = MONTH(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "工龄超过5年的员工名单",
+    "output": "SELECT name, hire_date, DATEDIFF(CURDATE(), hire_date) / 365 AS years FROM employees WHERE DATEDIFF(CURDATE(), hire_date) / 365 > 5;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下各部门预算排名",
+    "output": "SELECT name, budget FROM departments ORDER BY budget DESC;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "库存最多的前3种产品",
+    "output": "SELECT name, stock FROM products ORDER BY stock DESC LIMIT 3;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "北京地区的VIP客户有哪些",
+    "output": "SELECT id, name, email FROM customers WHERE city = '北京' AND level = 'VIP';"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下每个部门有多少人",
+    "output": "SELECT d.name, COUNT(e.id) AS count FROM employees e JOIN departments d ON e.department_id = d.id GROUP BY d.id;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "订单金额超过5000的订单详情",
+    "output": "SELECT o.id, c.name, o.total_amount, o.created_at FROM orders o JOIN customers c ON o.customer_id = c.id WHERE o.total_amount > 5000;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "本月活跃客户数量",
+    "output": "SELECT COUNT(DISTINCT customer_id) AS active_customers FROM orders WHERE YEAR(created_at) = YEAR(CURDATE()) AND MONTH(created_at) = MONTH(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下已发货但未付款的订单",
+    "output": "SELECT id, total_amount, created_at FROM orders WHERE status = '已发货';"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "每种产品的利润率",
+    "output": "SELECT name, price, ROUND((price - price * 0.7) / price * 100, 2) AS margin_pct FROM products;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下离职员工名单",
+    "output": "SELECT name, position, hire_date FROM employees WHERE status = '离职';"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "VIP客户的总消费额",
+    "output": "SELECT SUM(o.total_amount) AS vip_total FROM orders o JOIN customers c ON o.customer_id = c.id WHERE c.level = 'VIP';"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下平均订单金额最高的城市",
+    "output": "SELECT c.city, AVG(o.total_amount) AS avg_order FROM orders o JOIN customers c ON o.customer_id = c.id GROUP BY c.city ORDER BY avg_order DESC LIMIT 1;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "研发部员工的平均薪资",
+    "output": "SELECT AVG(e.salary) AS avg_salary FROM employees e JOIN departments d ON e.department_id = d.id WHERE d.name = '研发部';"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下所有待处理的订单",
+    "output": "SELECT id, customer_id, total_amount FROM orders WHERE status = '待处理';"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "每种商品的库存价值",
+    "output": "SELECT name, price, stock, ROUND(price * stock, 2) AS inventory_value FROM products ORDER BY inventory_value DESC;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "注册时间最近的10个客户",
+    "output": "SELECT id, name, registered_at FROM customers ORDER BY registered_at DESC LIMIT 10;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "订单数量超过5的客户",
+    "output": "SELECT c.id, c.name, COUNT(o.id) AS order_count FROM orders o JOIN customers c ON o.customer_id = c.id GROUP BY c.id, c.name HAVING COUNT(o.id) > 5 ORDER BY order_count DESC;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下每个部门的最高薪资",
+    "output": "SELECT d.name, MAX(e.salary) AS max_salary FROM employees e JOIN departments d ON e.department_id = d.id GROUP BY d.id;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "销售部所有在职员工",
+    "output": "SELECT name, position, salary FROM employees e JOIN departments d ON e.department_id = d.id WHERE d.name = '销售部' AND e.status = '在职';"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月的订单总数",
+    "output": "SELECT COUNT(*) AS order_count FROM orders o WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m');"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下本季度的订单总数",
+    "output": "SELECT COUNT(*) AS order_count FROM orders o WHERE QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下今年的订单总数",
+    "output": "SELECT COUNT(*) AS order_count FROM orders o WHERE YEAR(o.created_at) = YEAR(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下最近30天的订单总数",
+    "output": "SELECT COUNT(*) AS order_count FROM orders o WHERE o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "上个月的总销售额是多少",
+    "output": "SELECT SUM(total_amount) AS total_sales FROM orders o WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m');"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "本季度的总销售额是多少",
+    "output": "SELECT SUM(total_amount) AS total_sales FROM orders o WHERE QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "今年的总销售额是多少",
+    "output": "SELECT SUM(total_amount) AS total_sales FROM orders o WHERE YEAR(o.created_at) = YEAR(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "最近30天的总销售额是多少",
+    "output": "SELECT SUM(total_amount) AS total_sales FROM orders o WHERE o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月销售额最高的产品是什么",
+    "output": "SELECT p.name, SUM(o.total_amount) AS total_sales FROM orders o JOIN products p ON o.product_id = p.id WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m') GROUP BY p.id, p.name ORDER BY total_sales DESC LIMIT 1;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月销售额最高的产品是什么",
+    "output": "SELECT p.name, SUM(o.total_amount) AS total_sales FROM orders o JOIN products p ON o.product_id = p.id WHERE QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE()) GROUP BY p.id, p.name ORDER BY total_sales DESC LIMIT 1;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月销售额最高的产品是什么",
+    "output": "SELECT p.name, SUM(o.total_amount) AS total_sales FROM orders o JOIN products p ON o.product_id = p.id WHERE YEAR(o.created_at) = YEAR(CURDATE()) GROUP BY p.id, p.name ORDER BY total_sales DESC LIMIT 1;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月销售额最高的产品是什么",
+    "output": "SELECT p.name, SUM(o.total_amount) AS total_sales FROM orders o JOIN products p ON o.product_id = p.id WHERE o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) GROUP BY p.id, p.name ORDER BY total_sales DESC LIMIT 1;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月各部门的订单数",
+    "output": "SELECT d.name AS dept_name, COUNT(o.id) AS order_count FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m') GROUP BY d.id, d.name;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下本季度各部门的订单数",
+    "output": "SELECT d.name AS dept_name, COUNT(o.id) AS order_count FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE()) GROUP BY d.id, d.name;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下今年各部门的订单数",
+    "output": "SELECT d.name AS dept_name, COUNT(o.id) AS order_count FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE YEAR(o.created_at) = YEAR(CURDATE()) GROUP BY d.id, d.name;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下最近30天各部门的订单数",
+    "output": "SELECT d.name AS dept_name, COUNT(o.id) AS order_count FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) GROUP BY d.id, d.name;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "上个月新增了多少客户",
+    "output": "SELECT COUNT(*) AS new_customers FROM customers WHERE registered_at >= DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m');"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "本季度新增了多少客户",
+    "output": "SELECT COUNT(*) AS new_customers FROM customers WHERE registered_at >= QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "今年新增了多少客户",
+    "output": "SELECT COUNT(*) AS new_customers FROM customers WHERE registered_at >= YEAR(o.created_at) = YEAR(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "最近30天新增了多少客户",
+    "output": "SELECT COUNT(*) AS new_customers FROM customers WHERE registered_at >= o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月的平均订单金额",
+    "output": "SELECT AVG(total_amount) AS avg_amount FROM orders o WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m');"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下本季度的平均订单金额",
+    "output": "SELECT AVG(total_amount) AS avg_amount FROM orders o WHERE QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下今年的平均订单金额",
+    "output": "SELECT AVG(total_amount) AS avg_amount FROM orders o WHERE YEAR(o.created_at) = YEAR(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下最近30天的平均订单金额",
+    "output": "SELECT AVG(total_amount) AS avg_amount FROM orders o WHERE o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "上个月退货的订单有多少",
+    "output": "SELECT COUNT(*) AS return_count FROM orders o WHERE status = '已退货' AND DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m');"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "本季度退货的订单有多少",
+    "output": "SELECT COUNT(*) AS return_count FROM orders o WHERE status = '已退货' AND QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "今年退货的订单有多少",
+    "output": "SELECT COUNT(*) AS return_count FROM orders o WHERE status = '已退货' AND YEAR(o.created_at) = YEAR(CURDATE());"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "最近30天退货的订单有多少",
+    "output": "SELECT COUNT(*) AS return_count FROM orders o WHERE status = '已退货' AND o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月销售额最高的部门",
+    "output": "SELECT d.name AS dept_name, SUM(o.total_amount) AS total_sales FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m') GROUP BY d.id, d.name ORDER BY total_sales DESC LIMIT 1;"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下本季度销售额最高的部门",
+    "output": "SELECT d.name AS dept_name, SUM(o.total_amount) AS total_sales FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE()) GROUP BY d.id, d.name ORDER BY total_sales DESC LIMIT 1;"
+  }
+]

@@ -1,0 +1,827 @@
+app:
+  description: 全能型AI智能企业客服总管，支持意图识别、工具路由、知识库问答、智能派单、多轮对话
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: Agent智能客服总管
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/mimo:0.0.6@5cab5c4e0e69fc04a46c67e6d6545d45299d997fd73ede3477c2db6d2794d9bd
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .txt
+      - .pdf
+      - .md
+      - .docx
+      allowed_file_types:
+      - document
+      allowed_file_upload_methods:
+      - local_file
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+      number_limits: 5
+    opening_statement: '您好！我是AI智能客服总管，可以帮您：
+
+
+      1. 查询财务报表和用户信息
+
+      2. 查询物流和业务数据
+
+      3. 报修/投诉自动派单
+
+      4. 咨询公司规章政策
+
+
+      请问有什么可以帮您的？'
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions:
+    - 帮我查一下3月份的财务数据
+    - 员工年假有几天？
+    - 3号楼202房间电风扇坏了
+    suggested_questions_after_answer:
+      enabled: true
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: llm
+      id: start-to-intent
+      source: start
+      sourceHandle: source
+      target: intent-classifier
+      targetHandle: target
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: if-else
+      id: intent-to-router
+      source: intent-classifier
+      sourceHandle: source
+      target: intent-router
+      targetHandle: target
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetHandle: target
+        targetType: llm
+      id: router-to-param-check
+      source: intent-router
+      sourceHandle: 'true'
+      target: param-checker
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetHandle: target
+        targetType: tool
+      id: router-to-dispatch
+      source: intent-router
+      sourceHandle: true_2
+      target: dispatch-tool
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetHandle: target
+        targetType: tool
+      id: router-to-knowledge
+      source: intent-router
+      sourceHandle: true_3
+      target: knowledge-tool
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetHandle: target
+        targetType: llm
+      id: router-to-human
+      source: intent-router
+      sourceHandle: true_4
+      target: human-handoff
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetHandle: target
+        targetType: llm
+      id: router-to-fallback
+      source: intent-router
+      sourceHandle: false
+      target: fallback-reply
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetHandle: target
+        targetType: answer
+      id: dispatch-format-to-answer
+      source: dispatch-formatter
+      sourceHandle: source
+      target: final-answer
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetHandle: target
+        targetType: answer
+      id: knowledge-format-to-answer
+      source: knowledge-formatter
+      sourceHandle: source
+      target: final-answer
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetHandle: target
+        targetType: answer
+      id: human-to-answer
+      source: human-handoff
+      sourceHandle: source
+      target: final-answer
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetHandle: target
+        targetType: answer
+      id: fallback-to-answer
+      source: fallback-reply
+      sourceHandle: source
+      target: final-answer
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetHandle: target
+        targetType: if-else
+      id: param-check-to-decision
+      source: param-checker
+      sourceHandle: source
+      target: param-decision
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetHandle: target
+        targetType: llm
+      id: param-decision-to-ask
+      source: param-decision
+      sourceHandle: 'true'
+      target: ask-params
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetHandle: target
+        targetType: tool
+      id: param-decision-to-query-tool
+      source: param-decision
+      sourceHandle: false
+      target: query-tool
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetHandle: target
+        targetType: llm
+      id: query-tool-to-formatter
+      source: query-tool
+      sourceHandle: source
+      target: query-formatter
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetHandle: target
+        targetType: answer
+      id: query-format-to-answer
+      source: query-formatter
+      sourceHandle: source
+      target: final-answer
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetHandle: target
+        targetType: llm
+      id: dispatch-tool-to-formatter
+      source: dispatch-tool
+      sourceHandle: source
+      target: dispatch-formatter
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetHandle: target
+        targetType: llm
+      id: knowledge-tool-to-formatter
+      source: knowledge-tool
+      sourceHandle: source
+      target: knowledge-formatter
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetHandle: target
+        targetType: answer
+      id: ask-params-to-answer
+      source: ask-params
+      sourceHandle: source
+      target: final-answer
+      type: custom
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 90
+      id: start
+      position:
+        x: 80
+        y: 300
+      positionAbsolute:
+        x: 80
+        y: 300
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 分析用户输入，判断意图分类
+        model:
+          completion_params:
+            max_tokens: 512
+            temperature: 0.1
+          mode: chat
+          name: mimo-v2.5-pro
+          provider: langgenius/mimo/mimo
+        prompt_template:
+        - id: intent-prompt
+          role: system
+          text: '你是一个意图分类器。分析用户的输入，判断属于以下哪个类别，只输出类别名称：
+
+
+            1. tool_query — 用户想查询/修改业务数据（财务报表、用户信息、物流状态等），或描述了需要查数据的场景
+
+            2. tool_dispatch — 用户描述了报修/投诉/故障/损坏场景，需要派人处理
+
+            3. knowledge — 用户咨询公司规章政策、制度流程、员工福利等知识性问题
+
+            4. human_handoff — 用户明确要求人工服务、投诉升级、或表达强烈不满
+
+
+            注意：
+
+            - 如果用户提到具体设备/设施损坏、报修、投诉，归类为 tool_dispatch
+
+            - 如果用户问"年假几天""退货流程"等制度问题，归类为 knowledge
+
+            - 如果用户要查具体数据（月份、报表、单号），归类为 tool_query
+
+            - 只输出一个类别名称，不要解释
+
+            '
+        - id: intent-user
+          role: user
+          text: '{{#sys.query#}}'
+        title: 意图识别
+        type: llm
+        vision:
+          enabled: false
+      height: 120
+      id: intent-classifier
+      position:
+        x: 400
+        y: 280
+      type: custom
+      width: 244
+    - data:
+        conditions:
+        - comparison_operator: contains
+          id: cond-query
+          value: tool_query
+          variable_selector:
+          - intent-classifier
+          - text
+        - comparison_operator: contains
+          id: cond-dispatch
+          value: tool_dispatch
+          variable_selector:
+          - intent-classifier
+          - text
+        - comparison_operator: contains
+          id: cond-knowledge
+          value: knowledge
+          variable_selector:
+          - intent-classifier
+          - text
+        - comparison_operator: contains
+          id: cond-human
+          value: human_handoff
+          variable_selector:
+          - intent-classifier
+          - text
+        desc: 根据意图分类结果路由
+        title: 意图路由
+        type: if-else
+      height: 250
+      id: intent-router
+      position:
+        x: 720
+        y: 260
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 检查用户输入是否包含必要参数
+        model:
+          completion_params:
+            max_tokens: 256
+            temperature: 0.1
+          mode: chat
+          name: mimo-v2.5-pro
+          provider: langgenius/mimo/mimo
+        prompt_template:
+        - id: check-sys
+          role: system
+          text: '分析用户的需求，判断是否已经提供了查询所需的参数。
+
+
+            规则：
+
+            - 如果用户要查财务数据但没说月份 → 输出：缺少月份
+
+            - 如果用户要查用户信息但没说关键词 → 输出：缺少关键词
+
+            - 如果用户要查物流但没提供单号 → 输出：缺少单号
+
+            - 如果参数齐全 → 输出：齐全
+
+
+            只输出"齐全"或"缺少xxx"
+
+            '
+        - id: check-user
+          role: user
+          text: '{{#sys.query#}}'
+        title: 参数检查
+        type: llm
+        vision:
+          enabled: false
+      height: 120
+      id: param-checker
+      position:
+        x: 1040
+        y: 100
+      type: custom
+      width: 244
+    - data:
+        conditions:
+        - comparison_operator: not contains
+          id: cond-has-params
+          value: 齐全
+          variable_selector:
+          - param-checker
+          - text
+        desc: 判断参数是否齐全
+        title: 参数判断
+        type: if-else
+      height: 150
+      id: param-decision
+      position:
+        x: 1360
+        y: 100
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 输出追问话术
+        model:
+          completion_params:
+            max_tokens: 256
+            temperature: 0.7
+          mode: chat
+          name: mimo-v2.5-pro
+          provider: langgenius/mimo/mimo
+        prompt_template:
+        - id: ask-sys
+          role: system
+          text: '你是一个友善的客服助手。根据系统提示中的缺少参数信息，生成一段礼貌的追问话术。
+
+            要求：语气友好、简洁、专业。如果提示缺少月份，就问月份；缺少单号就问单号；缺少关键词就问关键词。
+
+            '
+        - id: ask-context
+          role: user
+          text: '系统提示: {{#param-checker.text#}}
+
+            用户原始问题: {{#sys.query#}}'
+        title: 追问参数
+        type: llm
+        vision:
+          enabled: false
+      height: 120
+      id: ask-params
+      position:
+        x: 1680
+        y: 100
+      type: custom
+      width: 244
+    - data:
+        agent_mode:
+          enabled: false
+        desc: 调用数据查询工具
+        prompt_template:
+        - id: qt-sys
+          role: system
+          text: '你是数据查询助手。调用合适的工具查询用户需要的数据。
+
+            '
+        - id: qt-user
+          role: user
+          text: '{{#sys.query#}}'
+        strategy: function_call
+        title: 数据查询
+        tool_configurations:
+          project1_enterprise_api__finance_ai_summary:
+            enabled: true
+          project1_enterprise_api__finance_report_query:
+            enabled: true
+          project1_enterprise_api__user_search:
+            enabled: true
+          project2_logistics_api__nlp_natural_query:
+            enabled: true
+        tools:
+        - dataset: null
+          enabled: true
+          provider_id: project1_enterprise_api
+          provider_type: api
+          tool_name: finance_report_query
+        - dataset: null
+          enabled: true
+          provider_id: project1_enterprise_api
+          provider_type: api
+          tool_name: finance_ai_summary
+        - dataset: null
+          enabled: true
+          provider_id: project1_enterprise_api
+          provider_type: api
+          tool_name: user_search
+        - dataset: null
+          enabled: true
+          provider_id: project2_logistics_api
+          provider_type: api
+          tool_name: nlp_natural_query
+        type: tool
+      height: 120
+      id: query-tool
+      position:
+        x: 1680
+        y: 250
+      type: custom
+      width: 244
+    - data:
+        desc: 将查询结果格式化为自然语言
+        model:
+          completion_params:
+            max_tokens: 1024
+            temperature: 0.5
+          mode: chat
+          name: mimo-v2.5-pro
+          provider: langgenius/mimo/mimo
+        prompt_template:
+        - id: fmt-sys
+          role: system
+          text: '你是数据格式化助手。将工具返回的JSON数据转换为用户友好的自然语言回答。
+
+            要求：
+
+            1. 关键数据（数字、日期、单号）用**加粗**显示
+
+            2. 结构清晰，重要信息优先
+
+            3. 如果数据为空，友好告知用户
+
+            4. 如果返回错误，告知用户服务暂时不可用
+
+            '
+        - id: fmt-user
+          role: user
+          text: '用户问题: {{#sys.query#}}
+
+            工具返回数据:
+
+            {{#query-tool.text#}}
+
+            '
+        title: 格式化查询结果
+        type: llm
+        vision:
+          enabled: false
+      height: 120
+      id: query-formatter
+      position:
+        x: 2000
+        y: 250
+      type: custom
+      width: 244
+    - data:
+        agent_mode:
+          enabled: false
+        desc: 调用智能派单工具
+        prompt_template:
+        - id: dp-sys
+          role: system
+          text: '将用户的报修/投诉描述传递给派单工具。
+
+            '
+        - id: dp-user
+          role: user
+          text: '{{#sys.query#}}'
+        strategy: function_call
+        title: 智能派单
+        tool_configurations:
+          project2_logistics_api__smart_dispatch:
+            enabled: true
+        tools:
+        - dataset: null
+          enabled: true
+          provider_id: project2_logistics_api
+          provider_type: api
+          tool_name: smart_dispatch
+        type: tool
+      height: 120
+      id: dispatch-tool
+      position:
+        x: 1040
+        y: 450
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 将工单信息格式化为友好回答
+        model:
+          completion_params:
+            max_tokens: 512
+            temperature: 0.5
+          mode: chat
+          name: mimo-v2.5-pro
+          provider: langgenius/mimo/mimo
+        prompt_template:
+        - id: dpfmt-sys
+          role: system
+          text: '你是工单处理助手。将派单工具返回的工单信息格式化为用户友好的回答。
+
+            包含：工单号、处理优先级、状态、创建时间。语气专业且有同理心。
+
+            关键信息用**加粗**显示。
+
+            '
+        - id: dpfmt-user
+          role: user
+          text: '用户问题: {{#sys.query#}}
+
+            派单结果: {{#dispatch-tool.text#}}
+
+            '
+        title: 格式化派单结果
+        type: llm
+        vision:
+          enabled: false
+      height: 120
+      id: dispatch-formatter
+      position:
+        x: 1360
+        y: 450
+      type: custom
+      width: 244
+    - data:
+        agent_mode:
+          enabled: false
+        desc: 调用知识库检索
+        prompt_template:
+        - id: kb-sys
+          role: system
+          text: '查询企业知识库，获取相关政策和制度信息。
+
+            '
+        - id: kb-user
+          role: user
+          text: '{{#sys.query#}}'
+        strategy: function_call
+        title: 知识库检索
+        tool_configurations:
+          project5_rag_api__rag_knowledge_query:
+            enabled: true
+        tools:
+        - dataset: null
+          enabled: true
+          provider_id: project5_rag_api
+          provider_type: api
+          tool_name: rag_knowledge_query
+        type: tool
+      height: 120
+      id: knowledge-tool
+      position:
+        x: 1040
+        y: 600
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 基于知识库结果生成回答
+        model:
+          completion_params:
+            max_tokens: 1024
+            temperature: 0.5
+          mode: chat
+          name: mimo-v2.5-pro
+          provider: langgenius/mimo/mimo
+        prompt_template:
+        - id: kbfmt-sys
+          role: system
+          text: '你是企业政策咨询助手。根据知识库检索结果回答用户问题。
+
+            要求：
+
+            1. 严格基于检索到的内容回答，不要编造信息
+
+            2. 如果检索结果中没有相关内容，如实告知
+
+            3. 引用来源文档名称
+
+            4. 关键条款用**加粗**显示
+
+            '
+        - id: kbfmt-user
+          role: user
+          text: '用户问题: {{#sys.query#}}
+
+            知识库检索结果: {{#knowledge-tool.text#}}
+
+            '
+        title: 格式化知识库回答
+        type: llm
+        vision:
+          enabled: false
+      height: 120
+      id: knowledge-formatter
+      position:
+        x: 1360
+        y: 600
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 输出人工转接话术
+        model:
+          completion_params:
+            max_tokens: 256
+            temperature: 0.7
+          mode: chat
+          name: mimo-v2.5-pro
+          provider: langgenius/mimo/mimo
+        prompt_template:
+        - id: human-sys
+          role: system
+          text: '你是客服助手。用户需要人工服务，请输出一段专业的转人工话术，包含：
+
+            1. 对用户情绪的理解和安抚
+
+            2. 告知正在转接人工客服
+
+            3. 预计等待时间（说1-2分钟）
+
+            语气要温暖专业。
+
+            '
+        - id: human-user
+          role: user
+          text: '{{#sys.query#}}'
+        title: 人工转接
+        type: llm
+        vision:
+          enabled: false
+      height: 120
+      id: human-handoff
+      position:
+        x: 1040
+        y: 780
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 无法识别意图时的兜底回复
+        model:
+          completion_params:
+            max_tokens: 256
+            temperature: 0.7
+          mode: chat
+          name: mimo-v2.5-pro
+          provider: langgenius/mimo/mimo
+        prompt_template:
+        - id: fb-sys
+          role: system
+          text: '你是友善的客服助手。用户的问题没有被正确识别。请礼貌地引导用户重新描述需求，并说明您能提供的服务范围：
+
+            1. 查询财务/用户/物流数据
+
+            2. 报修/投诉派单
+
+            3. 咨询公司规章制度
+
+            4. 转人工客服
+
+            '
+        - id: fb-user
+          role: user
+          text: '{{#sys.query#}}'
+        title: 兜底回复
+        type: llm
+        vision:
+          enabled: false
+      height: 120
+      id: fallback-reply
+      position:
+        x: 1040
+        y: 930
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#query-formatter.text#}}
+
+
+          {{#dispatch-formatter.text#}}
+
+
+          {{#knowledge-formatter.text#}}
+
+
+          {{#human-handoff.text#}}
+
+
+          {{#fallback-reply.text#}}
+
+
+          {{#ask-params.text#}}'
+        desc: 最终输出节点
+        title: 最终回答
+        type: answer
+        variables: []
+      height: 120
+      id: final-answer
+      position:
+        x: 2320
+        y: 400
+      type: custom
+      width: 244
+  rag_pipeline_variables: []

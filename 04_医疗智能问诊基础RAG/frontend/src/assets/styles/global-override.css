@@ -1,0 +1,107 @@
+/* ===== ElementPlus Theme Override ===== */
+:root {
+  --el-color-primary: #2B7DE9;
+  --el-color-primary-light-3: #6BA3ED;
+  --el-color-primary-light-5: #A3C6F4;
+  --el-color-primary-light-7: #D1E3F9;
+  --el-color-primary-light-9: #EBF3FF;
+  --el-color-primary-dark-2: #1A5FB4;
+  --el-color-success: #10B981;
+  --el-color-danger: #F53F3F;
+  --el-color-warning: #F7BA1E;
+  --el-border-radius-base: 8px;
+  --el-border-radius-small: 6px;
+  --el-border-radius-round: 9999px;
+  --el-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  --el-text-color-primary: #1D2129;
+  --el-text-color-regular: #4E5969;
+  --el-text-color-secondary: #86909C;
+  --el-bg-color: #FFFFFF;
+  --el-fill-color-light: #F7F8FA;
+  --el-fill-color-blank: #FFFFFF;
+  --el-border-color-lighter: #E5E6EB;
+  --el-border-color: #E5E6EB;
+}
+
+/* Button overrides */
+.el-button {
+  border-radius: 8px !important;
+  font-weight: 500;
+  transition: all 150ms ease;
+}
+.el-button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.el-button--primary {
+  --el-button-bg-color: #2B7DE9;
+  --el-button-border-color: #2B7DE9;
+  --el-button-hover-bg-color: #4A94EF;
+  --el-button-hover-border-color: #4A94EF;
+  --el-button-active-bg-color: #1A5FB4;
+  --el-button-active-border-color: #1A5FB4;
+}
+
+/* Input overrides */
+.el-input__wrapper,
+.el-textarea__inner {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  border: 1px solid #E5E6EB !important;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.el-input__wrapper:hover,
+.el-textarea__inner:hover {
+  border-color: #C9CDD4 !important;
+}
+.el-input__wrapper.is-focus,
+.el-textarea__inner:focus {
+  border-color: #2B7DE9 !important;
+  box-shadow: 0 0 0 2px rgba(43, 125, 233, 0.1) !important;
+}
+
+/* Table overrides */
+.el-table {
+  --el-table-header-bg-color: #F7F8FA;
+  --el-table-header-text-color: #1D2129;
+  --el-table-row-hover-bg-color: #EBF3FF;
+  --el-table-border-color: #E5E6EB;
+}
+.el-table th.el-table__cell {
+  font-weight: 600;
+}
+.el-table .el-table__row:hover > td {
+  background: #EBF3FF;
+}
+
+/* Tag overrides */
+.el-tag {
+  border-radius: 6px !important;
+  font-weight: 500;
+}
+
+/* Upload dragger override */
+.el-upload-dragger {
+  border-radius: 12px !important;
+  border: 2px dashed #E5E6EB !important;
+  transition: all 200ms ease;
+}
+.el-upload-dragger:hover {
+  border-color: #2B7DE9 !important;
+  background: rgba(43, 125, 233, 0.02);
+}
+
+/* Progress override */
+.el-progress-bar__inner {
+  border-radius: 4px !important;
+}
+
+/* Dialog override */
+.el-dialog {
+  border-radius: 12px !important;
+}
+
+/* Message box override */
+.el-message-box {
+  border-radius: 12px !important;
+}

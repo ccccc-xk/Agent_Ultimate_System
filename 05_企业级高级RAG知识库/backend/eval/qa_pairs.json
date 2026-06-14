@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "question": "普通感冒的治疗方法有哪些？",
+    "expected_answer_keywords": ["多饮水", "注意休息", "对乙酰氨基酚", "布洛芬"],
+    "expected_source_doc": "常见疾病诊疗指南.md"
+  },
+  {
+    "id": 2,
+    "question": "高血压的诊断标准是什么？",
+    "expected_answer_keywords": ["收缩压", "140mmHg", "舒张压", "90mmHg"],
+    "expected_source_doc": "常见疾病诊疗指南.md"
+  },
+  {
+    "id": 3,
+    "question": "2型糖尿病的一线治疗药物是什么？",
+    "expected_answer_keywords": ["二甲双胍"],
+    "expected_source_doc": "常见疾病诊疗指南.md"
+  },
+  {
+    "id": 4,
+    "question": "感冒和流感有什么区别？",
+    "expected_answer_keywords": ["鼻病毒", "流感病毒", "全身症状", "发热"],
+    "expected_source_doc": "常见疾病诊疗指南.md"
+  },
+  {
+    "id": 5,
+    "question": "阿司匹林的适应症有哪些？",
+    "expected_answer_keywords": ["解热", "镇痛", "抗血小板"],
+    "expected_source_doc": "常用药物说明.md"
+  },
+  {
+    "id": 6,
+    "question": "头孢类抗生素使用前需要注意什么？",
+    "expected_answer_keywords": ["过敏", "皮试", "青霉素"],
+    "expected_source_doc": "常用药物说明.md"
+  },
+  {
+    "id": 7,
+    "question": "布洛芬和对乙酰氨基酚有什么区别？",
+    "expected_answer_keywords": ["布洛芬", "对乙酰氨基酚", "胃肠道", "肝毒性"],
+    "expected_source_doc": "常用药物说明.md"
+  },
+  {
+    "id": 8,
+    "question": "奥美拉唑的主要作用是什么？",
+    "expected_answer_keywords": ["质子泵抑制剂", "胃酸", "抑制"],
+    "expected_source_doc": "常用药物说明.md"
+  },
+  {
+    "id": 9,
+    "question": "二甲双胍的禁忌症有哪些？",
+    "expected_answer_keywords": ["肾功能不全", "乳酸酸中毒"],
+    "expected_source_doc": "常用药物说明.md"
+  },
+  {
+    "id": 10,
+    "question": "急诊科主要处理什么类型的患者？",
+    "expected_answer_keywords": ["急危重症", "急性", "创伤"],
+    "expected_source_doc": "医院科室介绍.md"
+  },
+  {
+    "id": 11,
+    "question": "心内科主要治疗哪些疾病？",
+    "expected_answer_keywords": ["冠心病", "高血压", "心律失常"],
+    "expected_source_doc": "医院科室介绍.md"
+  },
+  {
+    "id": 12,
+    "question": "什么情况下需要去呼吸内科就诊？",
+    "expected_answer_keywords": ["咳嗽", "呼吸困难", "哮喘", "肺炎"],
+    "expected_source_doc": "医院科室介绍.md"
+  },
+  {
+    "id": 13,
+    "question": "高血压患者日常生活中需要注意什么？",
+    "expected_answer_keywords": ["低盐", "运动", "戒烟", "限酒"],
+    "expected_source_doc": "常见疾病诊疗指南.md"
+  },
+  {
+    "id": 14,
+    "question": "糖尿病患者如何控制血糖？",
+    "expected_answer_keywords": ["饮食", "运动", "监测", "药物"],
+    "expected_source_doc": "常见疾病诊疗指南.md"
+  },
+  {
+    "id": 15,
+    "question": "阿莫西林属于哪类抗生素？",
+    "expected_answer_keywords": ["青霉素", "β-内酰胺"],
+    "expected_source_doc": "常用药物说明.md"
+  },
+  {
+    "id": 16,
+    "question": "消化内科看什么病？",
+    "expected_answer_keywords": ["胃炎", "肠炎", "肝病", "消化"],
+    "expected_source_doc": "医院科室介绍.md"
+  },
+  {
+    "id": 17,
+    "question": "感冒需要使用抗生素吗？",
+    "expected_answer_keywords": ["不推荐", "病毒", "细菌感染"],
+    "expected_source_doc": "常见疾病诊疗指南.md"
+  },
+  {
+    "id": 18,
+    "question": "服用阿司匹林有什么不良反应？",
+    "expected_answer_keywords": ["胃肠道", "出血", "过敏"],
+    "expected_source_doc": "常用药物说明.md"
+  },
+  {
+    "id": 19,
+    "question": "神经内科主要看哪些疾病？",
+    "expected_answer_keywords": ["脑血管", "癫痫", "帕金森", "头痛"],
+    "expected_source_doc": "医院科室介绍.md"
+  },
+  {
+    "id": 20,
+    "question": "普通感冒的病程一般多久？",
+    "expected_answer_keywords": ["5-7天", "自限性"],
+    "expected_source_doc": "常见疾病诊疗指南.md"
+  }
+]

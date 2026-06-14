@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent 鏅鸿兘浣撳悎娴佹€荤 鈥?鑱婂ぉ婕旂ず</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .hero { text-align: center; padding: 40px 20px; max-width: 700px; }
+    .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    .hero p { font-size: 18px; opacity: 0.9; line-height: 1.6; margin-bottom: 24px; }
+    .hero .badge {
+      display: inline-block; background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3); border-radius: 20px;
+      padding: 6px 16px; font-size: 13px; margin-bottom: 24px;
+    }
+    .features { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
+    .feature {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px; padding: 16px; width: 130px; text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    .feature .icon { font-size: 28px; margin-bottom: 8px; }
+    .feature .label { font-size: 13px; font-weight: 500; }
+    .hint {
+      margin-top: 40px; font-size: 14px; opacity: 0.7;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+    .config-panel {
+      margin-top: 32px; background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;
+      padding: 20px 24px; max-width: 420px; width: 100%;
+    }
+    .config-panel label { display: block; font-size: 13px; margin-bottom: 4px; opacity: 0.8; }
+    .config-panel input {
+      width: 100%; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 8px; background: rgba(255,255,255,0.1); color: #fff;
+      font-size: 14px; margin-bottom: 12px; outline: none;
+    }
+    .config-panel input::placeholder { color: rgba(255,255,255,0.4); }
+    .config-panel input:focus { border-color: rgba(255,255,255,0.6); }
+    .config-panel button {
+      width: 100%; padding: 10px; background: #fff; color: #764ba2;
+      border: none; border-radius: 8px; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: transform 0.15s;
+    }
+    .config-panel button:hover { transform: scale(1.02); }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="badge">Dify Chatflow + Tool Calling</div>
+    <h1>Agent 鏅鸿兘浣撳悎娴佹€荤</h1>
+    <p>澶х櫧璇濊緭鍏?鈫?鏅鸿兘鎰忓浘璇嗗埆 鈫?鑷姩璋冪敤宸ュ叿/鐭ヨ瘑搴?/p>
+    <div class="features">
+      <div class="feature"><div class="icon">馃搳</div><div class="label">璐㈠姟鏌ヨ</div></div>
+      <div class="feature"><div class="icon">馃敡</div><div class="label">鏅鸿兘娲惧崟</div></div>
+      <div class="feature"><div class="icon">馃摎</div><div class="label">浼佷笟鐭ヨ瘑搴?/div></div>
+      <div class="feature"><div class="icon">馃彞</div><div class="label">鍖荤枟鐭ヨ瘑搴?/div></div>
+      <div class="feature"><div class="icon">馃懇鈥嶐煉?/div><div class="label">浜哄伐杞帴</div></div>
+    </div>
+    <div class="config-panel">
+      <label>API 鍦板潃</label>
+      <input type="text" id="cfg-api" placeholder="http://localhost:9006" value="http://localhost:9006">
+      <label>API Key (Dify 搴旂敤瀵嗛挜)</label>
+      <input type="text" id="cfg-key" placeholder="app-xxxxxxxxxxxxxxxx">
+      <button onclick="launchWidget()">鍚姩鑱婂ぉ缁勪欢</button>
+    </div>
+    <div class="hint">鐐瑰嚮鍙充笅瑙掓寜閽紑濮嬪璇?/div>
+  </div>
+
+  <script src="chat-widget.js"></script>
+  <script>
+    function launchWidget() {
+      var apiBase = document.getElementById('cfg-api').value.trim();
+      var apiKey = document.getElementById('cfg-key').value.trim();
+      if (!apiBase || !apiKey) { alert('璇峰～鍐?API 鍦板潃鍜?API Key'); return; }
+      if (window.AgentChatWidget._instance) { window.AgentChatWidget.destroy(); }
+      window.AgentChatWidget.init({
+        apiBase: apiBase, apiKey: apiKey, primaryColor: '#1890ff',
+        title: '鏅鸿兘瀹㈡湇鍔╂墜', subtitle: 'AI Agent 鎬荤',
+        welcomeText: '鎮ㄥソ锛佹垜鏄疉I鏅鸿兘瀹㈡湇鎬荤锛屽彲浠ュ府鎮ㄦ煡璇㈡暟鎹€佹姤淇淳鍗曘€佸挩璇㈡斂绛栥€佸仴搴峰挩璇€傝闂湁浠€涔堥渶瑕佸府鍔╃殑鍚楋紵',
+        logo: '馃'
+      });
+      window.AgentChatWidget.open();
+    }
+  </script>
+</body>
+</html>

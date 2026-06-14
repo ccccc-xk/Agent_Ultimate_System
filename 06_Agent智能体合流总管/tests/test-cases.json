@@ -1,0 +1,134 @@
+{
+  "test_suite": "06_Agent智能体合流总管 - 端到端测试",
+  "agent_id": "43fac71b-0234-4aa9-a8e4-c9358e622853",
+  "agent_api_key": "app-aPDJY1OXiPiE9wljpJeWwiNq",
+  "dify_base": "http://localhost:9006",
+  "test_cases": [
+    {
+      "id": "TC01",
+      "name": "知识库问答 - 规章制度",
+      "input": "员工年假有几天",
+      "expected_intent": "knowledge",
+      "expected_behavior": "调用企业知识库，基于规章制度文档回答年假天数",
+      "expected_keywords": ["年假", "天"],
+      "pass_criteria": "回答中包含年假相关天数信息，且说明来源为规章制度"
+    },
+    {
+      "id": "TC02",
+      "name": "知识库问答 - 合同管理",
+      "input": "合同到期前多久需要续签",
+      "expected_intent": "knowledge",
+      "expected_behavior": "调用企业知识库，基于合同管理规范回答",
+      "expected_keywords": ["合同", "续签", "天"],
+      "pass_criteria": "回答中包含合同续签时间要求"
+    },
+    {
+      "id": "TC03",
+      "name": "医疗咨询 - 用药建议",
+      "input": "感冒了应该吃什么药",
+      "expected_intent": "medical",
+      "expected_behavior": "调用医疗知识库，返回常用感冒药建议",
+      "expected_keywords": ["感冒", "药"],
+      "pass_criteria": "回答包含药物建议且附免责声明"
+    },
+    {
+      "id": "TC04",
+      "name": "医疗咨询 - 科室推荐",
+      "input": "我胸口疼应该看什么科",
+      "expected_intent": "medical",
+      "expected_behavior": "调用医疗知识库，推荐相关科室",
+      "expected_keywords": ["科"],
+      "pass_criteria": "回答推荐了相关科室并附免责声明"
+    },
+    {
+      "id": "TC05",
+      "name": "智能派单 - 报修场景",
+      "input": "3号楼202房间电风扇坏了，麻烦赶紧来修一下",
+      "expected_intent": "tool_dispatch",
+      "expected_behavior": "调用智能派单工具，自动创建维修工单",
+      "expected_keywords": ["工单", "3号楼"],
+      "pass_criteria": "返回工单信息（工单号、位置、问题描述）"
+    },
+    {
+      "id": "TC06",
+      "name": "智能派单 - 投诉场景",
+      "input": "我们楼层的空调已经坏了三天了还没人来修，太不像话了",
+      "expected_intent": "tool_dispatch",
+      "expected_behavior": "调用智能派单工具，创建投诉工单",
+      "expected_keywords": ["工单"],
+      "pass_criteria": "返回工单信息"
+    },
+    {
+      "id": "TC07",
+      "name": "参数追问 - 缺少月份",
+      "input": "帮我查一下财务数据",
+      "expected_intent": "tool_query",
+      "expected_behavior": "Agent识别需要月份参数，主动追问",
+      "expected_keywords": ["月"],
+      "pass_criteria": "回答中询问用户想查看哪个月份"
+    },
+    {
+      "id": "TC08",
+      "name": "参数追问 - 缺少关键词",
+      "input": "帮我查一下用户信息",
+      "expected_intent": "tool_query",
+      "expected_behavior": "Agent识别需要关键词参数，主动追问",
+      "expected_keywords": ["姓名", "手机"],
+      "pass_criteria": "回答中询问用户要查询的姓名或手机号"
+    },
+    {
+      "id": "TC09",
+      "name": "人工转接 - 明确要求",
+      "input": "我要投诉！让我跟你们经理说话",
+      "expected_intent": "human_handoff",
+      "expected_behavior": "Agent识别为人工诉求，返回转接话术",
+      "expected_keywords": ["转接", "人工"],
+      "pass_criteria": "回答包含转接人工客服相关内容"
+    },
+    {
+      "id": "TC10",
+      "name": "兜底回复 - 模糊输入",
+      "input": "asdfghjkl",
+      "expected_intent": "unknown",
+      "expected_behavior": "Agent无法识别意图，返回友好兜底回复",
+      "expected_keywords": ["试试"],
+      "pass_criteria": "回答引导用户重新描述需求"
+    },
+    {
+      "id": "TC11",
+      "name": "多轮对话 - 参数补全",
+      "input_rounds": [
+        "帮我查一下财务数据",
+        "2026年3月"
+      ],
+      "expected_intent": "tool_query",
+      "expected_behavior": "第一轮追问月份，第二轮拿到参数后调用财务查询工具",
+      "pass_criteria": "第二轮回答中包含财务数据相关结果"
+    },
+    {
+      "id": "TC12",
+      "name": "知识库问答 - 退货流程",
+      "input": "退货流程是什么",
+      "expected_intent": "knowledge",
+      "expected_behavior": "调用企业知识库查询退货流程",
+      "expected_keywords": ["退货"],
+      "pass_criteria": "回答中包含退货流程步骤"
+    },
+    {
+      "id": "TC13",
+      "name": "医疗咨询 - 药物查询",
+      "input": "阿莫西林有什么副作用",
+      "expected_intent": "medical",
+      "expected_behavior": "调用医疗知识库查询药物信息",
+      "expected_keywords": ["阿莫西林"],
+      "pass_criteria": "回答包含阿莫西林相关信息"
+    },
+    {
+      "id": "TC14",
+      "name": "开场白验证",
+      "input": "__OPENING__",
+      "expected_behavior": "新对话开始时显示欢迎语",
+      "pass_criteria": "包含'AI智能企业客服总管'和5项能力说明"
+    }
+  ]
+}

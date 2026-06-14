@@ -1,0 +1,164 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "政企物流智能化转化 API - Dify 工具集",
+    "description": "项目二：NLP智能派单和大白话查库工具",
+    "version": "1.0.0",
+    "contact": {
+      "name": "系统管理员",
+      "email": "admin@logistics.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://host.docker.internal:9002",
+      "description": "Docker 宿主机 - 项目二后端"
+    },
+    {
+      "url": "http://localhost:9002",
+      "description": "本地直接访问"
+    }
+  ],
+  "paths": {
+    "/api/nlp/dispatch": {
+      "post": {
+        "operationId": "smart_dispatch",
+        "summary": "智能派单",
+        "description": "接收口语化的报修/投诉描述，通过大模型自动提取位置、问题、优先级等信息并创建工单。当用户描述了设备故障、设施损坏、投诉建议等需要派人处理的场景时使用此工具。例如：'3号楼202室空调不制冷了'、'一楼大厅灯泡坏了'、'我要投诉食堂饭菜质量'。",
+        "requestBody": {
+          "required": true,
+          "description": "口语化描述文本",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["text"],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "用户的口语化报修/投诉描述",
+                    "examples": ["3号楼202房间电风扇坏了，已经三天没人修了"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "派单成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "integer", "example": 200 },
+                    "message": { "type": "string", "example": "工单创建成功" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "integer", "description": "工单ID" },
+                        "location": { "type": "string", "description": "位置" },
+                        "clientName": { "type": "string", "description": "报修人" },
+                        "issue": { "type": "string", "description": "问题描述" },
+                        "actionsTaken": {
+                          "type": "array",
+                          "items": { "type": "string" },
+                          "description": "已采取措施"
+                        },
+                        "assignedTo": { "type": "string", "description": "分配给" },
+                        "priority": {
+                          "type": "string",
+                          "enum": ["LOW", "NORMAL", "HIGH", "URGENT"],
+                          "description": "优先级"
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "工单状态",
+                          "example": "PENDING"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "创建时间"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "integer" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/nlp/query": {
+      "post": {
+        "operationId": "nlp_natural_query",
+        "summary": "大白话查库",
+        "description": "以自然语言查询业务数据库，系统通过大模型自动将自然语言转换为SQL并执行。当用户以口语化方式查询物流状态、工单记录、客户数据等结构化业务数据时使用此工具。例如：'最近一周有多少新工单'、'查询所有状态为待处理的维修工单'。",
+        "requestBody": {
+          "required": true,
+          "description": "自然语言查询问题",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["question"],
+                "properties": {
+                  "question": {
+                    "type": "string",
+                    "description": "用户的自然语言查询问题",
+                    "examples": ["最近一周有多少新工单？"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "integer", "example": 200 },
+                    "message": { "type": "string", "example": "查询成功" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "sql": { "type": "string", "description": "生成的SQL语句" },
+                        "result": {
+                          "type": "array",
+                          "items": { "type": "object" },
+                          "description": "查询结果集"
+                        },
+                        "answer": { "type": "string", "description": "自然语言回答" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+### ============================================================
+### Qwen2.5-7B-Instruct LoRA SFT 训练配置
+### 用途：垂直领域模型微调（投诉分类/工单提取/NL2SQL）
+### ============================================================
+
+### model
+model_name_or_path: /root/models/Qwen2.5-7B-Instruct
+
+### method
+stage: sft
+finetuning_type: lora
+lora_rank: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_target: q_proj,v_proj
+
+### dataset
+dataset_dir: data
+dataset: vertical_sft
+template: qwen
+cutoff_len: 1024
+max_samples: 200
+overwrite_cache: true
+
+### output
+output_dir: output/qwen25_lora
+
+### train
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 2.0e-4
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+logging_steps: 10
+save_steps: 50
+save_total_limit: 3
+report_to: none
+dataloader_num_workers: 4
+
+### eval
+val_size: 0.1
+per_device_eval_batch_size: 4
+eval_strategy: steps
+eval_steps: 50

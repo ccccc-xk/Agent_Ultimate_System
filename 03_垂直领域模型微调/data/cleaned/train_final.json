@@ -1,0 +1,848 @@
+[
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "你好，反馈一个问题：衣服价格欺诈，附有截图，请赔偿处理。",
+    "output": "【分类】：价格欺诈、物流延迟\n【核心诉求】：赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "冰箱到了发现价格欺诈，感觉不太满意，能否补发？",
+    "output": "【分类】：价格欺诈\n【核心诉求】：补发",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "什么破化妆品啊客服态度，我要赔偿！",
+    "output": "【分类】：客服态度、虚假宣传\n【核心诉求】：赔偿、补发",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "我等了好几天了，手表一直客服态度，退款什么时候能处理？",
+    "output": "【分类】：客服态度\n【核心诉求】：退款",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "买了一个洗衣机，收到后发现价格欺诈，想跟您商量一下补发的事情。",
+    "output": "【分类】：价格欺诈\n【核心诉求】：补发",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "购买的食品在保修期内出现物流延迟，请按合同约定赔偿。",
+    "output": "【分类】：物流延迟\n【核心诉求】：赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "我等了好几天了，食品一直质量问题，换货什么时候能处理？",
+    "output": "【分类】：质量问题\n【核心诉求】：换货",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "我于X月X日购买的冰箱，在使用过程中发现售后推诿，根据三包规定希望赔偿。",
+    "output": "【分类】：售后推诿、虚假宣传\n【核心诉求】：赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "订单号XXXX，洗衣机物流延迟，已保留证据，要求换货。",
+    "output": "【分类】：物流延迟\n【核心诉求】：换货",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "你们这手表也太垃圾了吧虚假宣传，赶紧赔偿！",
+    "output": "【分类】：虚假宣传、物流延迟\n【核心诉求】：赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "你们这笔记本电脑也太垃圾了吧价格欺诈，赶紧换货！",
+    "output": "【分类】：价格欺诈\n【核心诉求】：换货",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "家具到了发现质量问题，感觉不太满意，能否退款？",
+    "output": "【分类】：质量问题\n【核心诉求】：退款",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "不错不错，鞋子质量问题，你们售后服务也是够可以的，补发。",
+    "output": "【分类】：质量问题\n【核心诉求】：补发、道歉",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "气死了！手表物流延迟，必须退款！",
+    "output": "【分类】：物流延迟、质量问题\n【核心诉求】：退款",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "买个家具结果物流延迟，我真的是无语了，赔偿！",
+    "output": "【分类】：物流延迟\n【核心诉求】：赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "你好，反馈一个问题：鞋子物流延迟，附有截图，请道歉处理。",
+    "output": "【分类】：物流延迟\n【核心诉求】：道歉、退款",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "气死了！化妆品虚假宣传，必须道歉！",
+    "output": "【分类】：虚假宣传\n【核心诉求】：道歉、退款",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "手机到了发现物流延迟，感觉不太满意，能否换货？",
+    "output": "【分类】：物流延迟、售后推诿\n【核心诉求】：换货、赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "您好，我购买的化妆品出现了虚假宣传的情况，希望能道歉，谢谢。",
+    "output": "【分类】：虚假宣传、售后推诿\n【核心诉求】：道歉",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "哇，你们这化妆品质量真不错啊，客服态度，真是物有所值，道歉吧？",
+    "output": "【分类】：客服态度、价格欺诈\n【核心诉求】：道歉",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "厉害了，家具买回来就质量问题，这服务水平真是绝了，赔偿！",
+    "output": "【分类】：质量问题、价格欺诈\n【核心诉求】：赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "不好意思打扰了，我买的家具质量问题，请问可以换货吗？",
+    "output": "【分类】：质量问题、物流延迟\n【核心诉求】：换货",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "赶紧的吧，手表物流延迟，拖了这么久了，该补发了吧！",
+    "output": "【分类】：物流延迟\n【核心诉求】：补发",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "什么破鞋子啊客服态度，我要退款！",
+    "output": "【分类】：客服态度、价格欺诈\n【核心诉求】：退款",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "不好意思打扰了，我买的冰箱售后推诿，请问可以赔偿吗？",
+    "output": "【分类】：售后推诿、客服态度\n【核心诉求】：赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "我于X月X日购买的笔记本电脑，在使用过程中发现虚假宣传，根据三包规定希望补发。",
+    "output": "【分类】：虚假宣传\n【核心诉求】：补发",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "我于X月X日购买的洗衣机，在使用过程中发现客服态度，根据三包规定希望补发。",
+    "output": "【分类】：客服态度、虚假宣传\n【核心诉求】：补发",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "气死了！鞋子客服态度，必须退款！",
+    "output": "【分类】：客服态度、售后推诿\n【核心诉求】：退款",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "赶紧的吧，笔记本电脑价格欺诈，拖了这么久了，该赔偿了吧！",
+    "output": "【分类】：价格欺诈、虚假宣传\n【核心诉求】：赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "体验了一回你们的手机，质量问题，下次一定推荐给敌人，换货。",
+    "output": "【分类】：质量问题\n【核心诉求】：换货",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "赶紧的吧，冰箱价格欺诈，拖了这么久了，该退款了吧！",
+    "output": "【分类】：价格欺诈\n【核心诉求】：退款",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "不好意思打扰了，我买的衣服虚假宣传，请问可以换货吗？",
+    "output": "【分类】：虚假宣传、售后推诿\n【核心诉求】：换货",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "冰箱到了发现虚假宣传，感觉不太满意，能否赔偿？",
+    "output": "【分类】：虚假宣传、质量问题\n【核心诉求】：赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "您好，我购买的化妆品出现了价格欺诈的情况，希望能补发，谢谢。",
+    "output": "【分类】：价格欺诈\n【核心诉求】：补发、赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "急死了！衣服质量问题，明天就要用，能不能快点补发？",
+    "output": "【分类】：质量问题\n【核心诉求】：补发",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "厉害了，食品买回来就售后推诿，这服务水平真是绝了，赔偿！",
+    "output": "【分类】：售后推诿\n【核心诉求】：赔偿、道歉",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "你好，反馈一个问题：食品虚假宣传，附有截图，请赔偿处理。",
+    "output": "【分类】：虚假宣传\n【核心诉求】：赔偿、补发",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "买了一个手表，收到后发现客服态度，想跟您商量一下道歉的事情。",
+    "output": "【分类】：客服态度\n【核心诉求】：道歉、赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "买了一个手表，收到后发现价格欺诈，想跟您商量一下赔偿的事情。",
+    "output": "【分类】：价格欺诈\n【核心诉求】：赔偿",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "笔记本电脑价格欺诈，请核实情况并尽快退款，如有问题可以再沟通。",
+    "output": "【分类】：价格欺诈、售后推诿\n【核心诉求】：退款",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "你们这冰箱太有创意了，物流延迟，我想知道还有谁比你们更差，换货？",
+    "output": "【分类】：物流延迟、客服态度\n【核心诉求】：换货",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "不错不错，手机虚假宣传，你们售后服务也是够可以的，换货。",
+    "output": "【分类】：虚假宣传、价格欺诈\n【核心诉求】：换货",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "拜托快点处理，手表价格欺诈已经好几天了，补发！",
+    "output": "【分类】：价格欺诈\n【核心诉求】：补发",
+    "category": "complaint"
+  },
+  {
+    "instruction": "分析投诉文本，归类标签并提取诉求。",
+    "input": "鞋子客服态度，请核实情况并尽快换货，如有问题可以再沟通。",
+    "output": "【分类】：客服态度\n【核心诉求】：换货",
+    "category": "complaint"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "3楼301会议室那个门禁无法识别了，李总反映的",
+    "output": "{\"location\": \"3楼301会议室\", \"client_name\": \"李总\", \"issue\": \"门禁无法识别\", \"actions_taken\": [\"已加注制冷剂\"], \"assigned_to\": \"安保部大刘\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "吴助理说5楼茶水间的电梯有问题，打不开",
+    "output": "{\"location\": \"5楼茶水间\", \"client_name\": \"吴助理\", \"issue\": \"电梯打不开\", \"actions_taken\": [\"已断电等待\"], \"assigned_to\": \"维保单位周师傅\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "吴助理说负1楼配电房的空调有问题，异响",
+    "output": "{\"location\": \"负1楼配电房\", \"client_name\": \"吴助理\", \"issue\": \"空调异响\", \"actions_taken\": [\"已加注制冷剂\", \"已更换耗材\", \"已检查线路\"], \"assigned_to\": \"维修部李工\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "刚接到孙部长的报修，负1楼配电房的门禁无法识别",
+    "output": "{\"location\": \"负1楼配电房\", \"client_name\": \"孙部长\", \"issue\": \"门禁无法识别\", \"actions_taken\": [\"已检查线路\", \"已通知物业\", \"已拍照记录\"], \"assigned_to\": \"安保部大刘\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "4楼研发部工位区的投影仪打不开了，小刘催了好几次了",
+    "output": "{\"location\": \"4楼研发部工位区\", \"client_name\": \"小刘\", \"issue\": \"投影仪打不开\", \"actions_taken\": [\"已通知物业\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "刚才小刘来报修，2楼财务部办公室的投影仪打不开了，影响办公",
+    "output": "{\"location\": \"2楼财务部办公室\", \"client_name\": \"小刘\", \"issue\": \"投影仪打不开\", \"actions_taken\": [\"已拍照记录\", \"已清洁滤网\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "王姐发消息说1楼前台接待区的饮水机不制冷，要尽快处理",
+    "output": "{\"location\": \"1楼前台接待区\", \"client_name\": \"王姐\", \"issue\": \"饮水机不制冷\", \"actions_taken\": [\"已拍照记录\", \"已重置密码\"], \"assigned_to\": \"物业部老张\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "帮吴助理报个修，地下车库B2层那个WiFi一直连不上",
+    "output": "{\"location\": \"地下车库B2层\", \"client_name\": \"吴助理\", \"issue\": \"WiFi连不上\", \"actions_taken\": [\"已通知物业\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "赵工说5楼茶水间那边饮水机异响了，看看谁去处理下",
+    "output": "{\"location\": \"5楼茶水间\", \"client_name\": \"赵工\", \"issue\": \"饮水机异响\", \"actions_taken\": [\"已断电等待\", \"已重置密码\"], \"assigned_to\": \"物业部老张\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "8楼总经理办公室出了点状况，周科长反馈打印机打不开",
+    "output": "{\"location\": \"8楼总经理办公室\", \"client_name\": \"周科长\", \"issue\": \"打印机打不开\", \"actions_taken\": [\"已加注制冷剂\"], \"assigned_to\": \"行政部小王\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "2楼财务部办公室出了点状况，吴助理反馈电梯异响",
+    "output": "{\"location\": \"2楼财务部办公室\", \"client_name\": \"吴助理\", \"issue\": \"电梯异响\", \"actions_taken\": [\"已联系厂家\"], \"assigned_to\": \"维保单位周师傅\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "孙部长今天过来说5楼茶水间的空调不制冷，挺着急的",
+    "output": "{\"location\": \"5楼茶水间\", \"client_name\": \"孙部长\", \"issue\": \"空调不制冷\", \"actions_taken\": [\"已联系厂家\", \"已重置密码\", \"已检查线路\"], \"assigned_to\": \"维修部李工\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "刚才李总来报修，6楼天台的电梯异响了，影响办公",
+    "output": "{\"location\": \"6楼天台\", \"client_name\": \"李总\", \"issue\": \"电梯异响\", \"actions_taken\": [\"已更换耗材\", \"已检查电源\"], \"assigned_to\": \"维保单位周师傅\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "李总说1楼前台接待区那边门禁打不开了，看看谁去处理下",
+    "output": "{\"location\": \"1楼前台接待区\", \"client_name\": \"李总\", \"issue\": \"门禁打不开\", \"actions_taken\": [\"已检查线路\", \"已联系厂家\"], \"assigned_to\": \"安保部大刘\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "张经理今天过来说2楼财务部办公室的打印机画面模糊，挺着急的",
+    "output": "{\"location\": \"2楼财务部办公室\", \"client_name\": \"张经理\", \"issue\": \"打印机画面模糊\", \"actions_taken\": [\"已拍照记录\", \"已重置密码\", \"已更换耗材\"], \"assigned_to\": \"行政部小王\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "小刘说1楼大厅那边WiFi连不上了，看看谁去处理下",
+    "output": "{\"location\": \"1楼大厅\", \"client_name\": \"小刘\", \"issue\": \"WiFi连不上\", \"actions_taken\": [\"已检查电源\", \"已检查网络\", \"已通知物业\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "张经理今天过来说5楼茶水间的WiFi信号弱，挺着急的",
+    "output": "{\"location\": \"5楼茶水间\", \"client_name\": \"张经理\", \"issue\": \"WiFi信号弱\", \"actions_taken\": [\"已断电等待\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "刚才李总来报修，5楼茶水间的监控摄像头画面模糊了，影响办公",
+    "output": "{\"location\": \"5楼茶水间\", \"client_name\": \"李总\", \"issue\": \"监控摄像头画面模糊\", \"actions_taken\": [\"已联系厂家\"], \"assigned_to\": \"安保部大刘\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "孙部长发消息说1楼前台接待区的打印机打不开，要尽快处理",
+    "output": "{\"location\": \"1楼前台接待区\", \"client_name\": \"孙部长\", \"issue\": \"打印机打不开\", \"actions_taken\": [\"已检查线路\", \"已断电等待\", \"已更换耗材\"], \"assigned_to\": \"行政部小王\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "小刘说2楼财务部办公室的电梯有问题，异响",
+    "output": "{\"location\": \"2楼财务部办公室\", \"client_name\": \"小刘\", \"issue\": \"电梯异响\", \"actions_taken\": [\"已清洁滤网\", \"已重启设备\", \"已断电等待\"], \"assigned_to\": \"维保单位周师傅\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "4楼研发部工位区那个空调异响了，李总反映的",
+    "output": "{\"location\": \"4楼研发部工位区\", \"client_name\": \"李总\", \"issue\": \"空调异响\", \"actions_taken\": [\"已检查电源\"], \"assigned_to\": \"维修部李工\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "张经理说地下车库B2层的投影仪有问题，打不开",
+    "output": "{\"location\": \"地下车库B2层\", \"client_name\": \"张经理\", \"issue\": \"投影仪打不开\", \"actions_taken\": [\"已更换耗材\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "赵工说8楼总经理办公室的饮水机有问题，异响",
+    "output": "{\"location\": \"8楼总经理办公室\", \"client_name\": \"赵工\", \"issue\": \"饮水机异响\", \"actions_taken\": [\"已检查网络\", \"已加注制冷剂\", \"已清洁滤网\"], \"assigned_to\": \"物业部老张\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "帮孙部长报个修，6楼天台那个饮水机一直不制冷",
+    "output": "{\"location\": \"6楼天台\", \"client_name\": \"孙部长\", \"issue\": \"饮水机不制冷\", \"actions_taken\": [\"已检查线路\", \"已通知物业\", \"已加注制冷剂\"], \"assigned_to\": \"物业部老张\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "孙部长说3楼301会议室的投影仪有问题，打不开",
+    "output": "{\"location\": \"3楼301会议室\", \"client_name\": \"孙部长\", \"issue\": \"投影仪打不开\", \"actions_taken\": [\"已通知物业\", \"已重启设备\", \"已断电等待\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "小刘说1楼前台接待区那边监控摄像头画面模糊了，看看谁去处理下",
+    "output": "{\"location\": \"1楼前台接待区\", \"client_name\": \"小刘\", \"issue\": \"监控摄像头画面模糊\", \"actions_taken\": [\"已拍照记录\"], \"assigned_to\": \"安保部大刘\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "5楼茶水间出了点状况，小刘反馈监控摄像头连不上",
+    "output": "{\"location\": \"5楼茶水间\", \"client_name\": \"小刘\", \"issue\": \"监控摄像头连不上\", \"actions_taken\": [\"已重置密码\"], \"assigned_to\": \"安保部大刘\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "帮张经理报个修，5楼茶水间那个饮水机一直不制冷",
+    "output": "{\"location\": \"5楼茶水间\", \"client_name\": \"张经理\", \"issue\": \"饮水机不制冷\", \"actions_taken\": [\"已清洁滤网\", \"已断电等待\"], \"assigned_to\": \"物业部老张\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "帮张经理报个修，1楼大厅那个电梯一直打不开",
+    "output": "{\"location\": \"1楼大厅\", \"client_name\": \"张经理\", \"issue\": \"电梯打不开\", \"actions_taken\": [\"已清洁滤网\", \"已拍照记录\"], \"assigned_to\": \"维保单位周师傅\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "吴助理今天过来说8楼总经理办公室的打印机卡纸，挺着急的",
+    "output": "{\"location\": \"8楼总经理办公室\", \"client_name\": \"吴助理\", \"issue\": \"打印机卡纸\", \"actions_taken\": [\"已检查电源\"], \"assigned_to\": \"行政部小王\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "刚接到吴助理的报修，3楼301会议室的WiFi连不上",
+    "output": "{\"location\": \"3楼301会议室\", \"client_name\": \"吴助理\", \"issue\": \"WiFi连不上\", \"actions_taken\": [\"已清洁滤网\", \"已更换耗材\", \"已重置密码\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "负1楼配电房那个饮水机异响了，李总反映的",
+    "output": "{\"location\": \"负1楼配电房\", \"client_name\": \"李总\", \"issue\": \"饮水机异响\", \"actions_taken\": [\"已检查网络\"], \"assigned_to\": \"物业部老张\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "紧急！周科长反映负1楼配电房的WiFi信号弱，需要马上处理",
+    "output": "{\"location\": \"负1楼配电房\", \"client_name\": \"周科长\", \"issue\": \"WiFi信号弱\", \"actions_taken\": [\"已加注制冷剂\", \"已通知物业\", \"已断电等待\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "周科长说1楼大厅那边门禁打不开了，看看谁去处理下",
+    "output": "{\"location\": \"1楼大厅\", \"client_name\": \"周科长\", \"issue\": \"门禁打不开\", \"actions_taken\": [\"已检查电源\"], \"assigned_to\": \"安保部大刘\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "紧急！钱会计反映负1楼配电房的投影仪打不开，需要马上处理",
+    "output": "{\"location\": \"负1楼配电房\", \"client_name\": \"钱会计\", \"issue\": \"投影仪打不开\", \"actions_taken\": [\"已更换耗材\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "4楼研发部工位区出了点状况，王姐反馈投影仪打不开",
+    "output": "{\"location\": \"4楼研发部工位区\", \"client_name\": \"王姐\", \"issue\": \"投影仪打不开\", \"actions_taken\": [\"已联系厂家\", \"已清洁滤网\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "紧急！赵工反映负1楼配电房的空调漏水，需要马上处理",
+    "output": "{\"location\": \"负1楼配电房\", \"client_name\": \"赵工\", \"issue\": \"空调漏水\", \"actions_taken\": [\"已联系厂家\"], \"assigned_to\": \"维修部李工\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "刚才李总来报修，5楼茶水间的打印机打不开了，影响办公",
+    "output": "{\"location\": \"5楼茶水间\", \"client_name\": \"李总\", \"issue\": \"打印机打不开\", \"actions_taken\": [\"已断电等待\", \"已通知物业\", \"已加注制冷剂\"], \"assigned_to\": \"行政部小王\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "帮赵工报个修，1楼前台接待区那个监控摄像头一直打不开",
+    "output": "{\"location\": \"1楼前台接待区\", \"client_name\": \"赵工\", \"issue\": \"监控摄像头打不开\", \"actions_taken\": [\"已重置密码\"], \"assigned_to\": \"安保部大刘\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "1楼前台接待区的空调不制冷了，周科长催了好几次了",
+    "output": "{\"location\": \"1楼前台接待区\", \"client_name\": \"周科长\", \"issue\": \"空调不制冷\", \"actions_taken\": [\"已联系厂家\", \"已更换耗材\", \"已检查电源\"], \"assigned_to\": \"维修部李工\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "1楼前台接待区的打印机打不开了，钱会计催了好几次了",
+    "output": "{\"location\": \"1楼前台接待区\", \"client_name\": \"钱会计\", \"issue\": \"打印机打不开\", \"actions_taken\": [\"已拍照记录\"], \"assigned_to\": \"行政部小王\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "帮张经理报个修，4楼研发部工位区那个饮水机一直异响",
+    "output": "{\"location\": \"4楼研发部工位区\", \"client_name\": \"张经理\", \"issue\": \"饮水机异响\", \"actions_taken\": [\"已重启设备\", \"已通知物业\", \"已更换耗材\"], \"assigned_to\": \"物业部老张\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "陈主任说6楼天台那边饮水机漏水了，看看谁去处理下",
+    "output": "{\"location\": \"6楼天台\", \"client_name\": \"陈主任\", \"issue\": \"饮水机漏水\", \"actions_taken\": [\"已重启设备\", \"已检查线路\", \"已检查电源\"], \"assigned_to\": \"物业部老张\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "小刘打电话说地下车库B2层的监控摄像头打不开了",
+    "output": "{\"location\": \"地下车库B2层\", \"client_name\": \"小刘\", \"issue\": \"监控摄像头打不开\", \"actions_taken\": [\"已断电等待\"], \"assigned_to\": \"安保部大刘\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "6楼天台出了点状况，小刘反馈WiFi信号弱",
+    "output": "{\"location\": \"6楼天台\", \"client_name\": \"小刘\", \"issue\": \"WiFi信号弱\", \"actions_taken\": [\"已通知物业\", \"已重置密码\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "紧急！周科长反映1楼前台接待区的WiFi连不上，需要马上处理",
+    "output": "{\"location\": \"1楼前台接待区\", \"client_name\": \"周科长\", \"issue\": \"WiFi连不上\", \"actions_taken\": [\"已联系厂家\", \"已检查网络\"], \"assigned_to\": \"IT部小陈\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "5楼茶水间出了点状况，张经理反馈电梯异响",
+    "output": "{\"location\": \"5楼茶水间\", \"client_name\": \"张经理\", \"issue\": \"电梯异响\", \"actions_taken\": [\"已检查线路\", \"已检查网络\"], \"assigned_to\": \"维保单位周师傅\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "6楼天台出了点状况，李总反馈饮水机漏水",
+    "output": "{\"location\": \"6楼天台\", \"client_name\": \"李总\", \"issue\": \"饮水机漏水\", \"actions_taken\": [\"已检查线路\", \"已检查电源\", \"已更换耗材\"], \"assigned_to\": \"物业部老张\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "刚才小刘来报修，4楼研发部工位区的电梯打不开了，影响办公",
+    "output": "{\"location\": \"4楼研发部工位区\", \"client_name\": \"小刘\", \"issue\": \"电梯打不开\", \"actions_taken\": [\"已检查网络\", \"已通知物业\"], \"assigned_to\": \"维保单位周师傅\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "2楼财务部办公室出了点状况，李总反馈门禁打不开",
+    "output": "{\"location\": \"2楼财务部办公室\", \"client_name\": \"李总\", \"issue\": \"门禁打不开\", \"actions_taken\": [\"已加注制冷剂\", \"已拍照记录\"], \"assigned_to\": \"安保部大刘\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "紧急！王姐反映地下车库B2层的电梯异响，需要马上处理",
+    "output": "{\"location\": \"地下车库B2层\", \"client_name\": \"王姐\", \"issue\": \"电梯异响\", \"actions_taken\": [\"已联系厂家\", \"已检查网络\", \"已重置密码\"], \"assigned_to\": \"维保单位周师傅\", \"priority\": \"低\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "周科长今天过来说1楼前台接待区的空调漏水，挺着急的",
+    "output": "{\"location\": \"1楼前台接待区\", \"client_name\": \"周科长\", \"issue\": \"空调漏水\", \"actions_taken\": [\"已检查线路\"], \"assigned_to\": \"维修部李工\", \"priority\": \"中\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "从口语化文本中提取工单信息，返回纯JSON。",
+    "input": "紧急！王姐反映5楼茶水间的门禁打不开，需要马上处理",
+    "output": "{\"location\": \"5楼茶水间\", \"client_name\": \"王姐\", \"issue\": \"门禁打不开\", \"actions_taken\": [\"已重置密码\"], \"assigned_to\": \"安保部大刘\", \"priority\": \"高\"}",
+    "category": "workorder"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下所有已付款的订单",
+    "output": "SELECT id, total_amount FROM orders WHERE status = '已付款';",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "上海地区的客户有多少",
+    "output": "SELECT COUNT(*) AS shanghai_customers FROM customers WHERE city = '上海';",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月退货的订单",
+    "output": "SELECT id, total_amount, created_at FROM orders WHERE status = '已退货' AND DATE_FORMAT(created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m');",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下年薪超过20万的员工",
+    "output": "SELECT name, salary, position FROM employees WHERE salary > 200000;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "每个城市的平均订单金额",
+    "output": "SELECT c.city, AVG(o.total_amount) AS avg_amount FROM orders o JOIN customers c ON o.customer_id = c.id GROUP BY c.city ORDER BY avg_amount DESC;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下销量最好的产品类别",
+    "output": "SELECT p.category, SUM(o.quantity) AS total_sold FROM orders o JOIN products p ON o.product_id = p.id GROUP BY p.category ORDER BY total_sold DESC LIMIT 1;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下本月的订单总额",
+    "output": "SELECT SUM(total_amount) AS month_total FROM orders WHERE YEAR(created_at) = YEAR(CURDATE()) AND MONTH(created_at) = MONTH(CURDATE());",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "工龄超过5年的员工名单",
+    "output": "SELECT name, hire_date, DATEDIFF(CURDATE(), hire_date) / 365 AS years FROM employees WHERE DATEDIFF(CURDATE(), hire_date) / 365 > 5;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下各部门预算排名",
+    "output": "SELECT name, budget FROM departments ORDER BY budget DESC;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "库存最多的前3种产品",
+    "output": "SELECT name, stock FROM products ORDER BY stock DESC LIMIT 3;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下每个部门有多少人",
+    "output": "SELECT d.name, COUNT(e.id) AS count FROM employees e JOIN departments d ON e.department_id = d.id GROUP BY d.id;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "订单金额超过5000的订单详情",
+    "output": "SELECT o.id, c.name, o.total_amount, o.created_at FROM orders o JOIN customers c ON o.customer_id = c.id WHERE o.total_amount > 5000;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下已发货但未付款的订单",
+    "output": "SELECT id, total_amount, created_at FROM orders WHERE status = '已发货';",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "VIP客户的总消费额",
+    "output": "SELECT SUM(o.total_amount) AS vip_total FROM orders o JOIN customers c ON o.customer_id = c.id WHERE c.level = 'VIP';",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下平均订单金额最高的城市",
+    "output": "SELECT c.city, AVG(o.total_amount) AS avg_order FROM orders o JOIN customers c ON o.customer_id = c.id GROUP BY c.city ORDER BY avg_order DESC LIMIT 1;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "研发部员工的平均薪资",
+    "output": "SELECT AVG(e.salary) AS avg_salary FROM employees e JOIN departments d ON e.department_id = d.id WHERE d.name = '研发部';",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下所有待处理的订单",
+    "output": "SELECT id, customer_id, total_amount FROM orders WHERE status = '待处理';",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "注册时间最近的10个客户",
+    "output": "SELECT id, name, registered_at FROM customers ORDER BY registered_at DESC LIMIT 10;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "订单数量超过5的客户",
+    "output": "SELECT c.id, c.name, COUNT(o.id) AS order_count FROM orders o JOIN customers c ON o.customer_id = c.id GROUP BY c.id, c.name HAVING COUNT(o.id) > 5 ORDER BY order_count DESC;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下每个部门的最高薪资",
+    "output": "SELECT d.name, MAX(e.salary) AS max_salary FROM employees e JOIN departments d ON e.department_id = d.id GROUP BY d.id;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月的订单总数",
+    "output": "SELECT COUNT(*) AS order_count FROM orders o WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m');",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下本季度的订单总数",
+    "output": "SELECT COUNT(*) AS order_count FROM orders o WHERE QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE());",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下今年的订单总数",
+    "output": "SELECT COUNT(*) AS order_count FROM orders o WHERE YEAR(o.created_at) = YEAR(CURDATE());",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "上个月的总销售额是多少",
+    "output": "SELECT SUM(total_amount) AS total_sales FROM orders o WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m');",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "本季度的总销售额是多少",
+    "output": "SELECT SUM(total_amount) AS total_sales FROM orders o WHERE QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE());",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "今年的总销售额是多少",
+    "output": "SELECT SUM(total_amount) AS total_sales FROM orders o WHERE YEAR(o.created_at) = YEAR(CURDATE());",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "最近30天的总销售额是多少",
+    "output": "SELECT SUM(total_amount) AS total_sales FROM orders o WHERE o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月销售额最高的产品是什么",
+    "output": "SELECT p.name, SUM(o.total_amount) AS total_sales FROM orders o JOIN products p ON o.product_id = p.id WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m') GROUP BY p.id, p.name ORDER BY total_sales DESC LIMIT 1;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月各部门的订单数",
+    "output": "SELECT d.name AS dept_name, COUNT(o.id) AS order_count FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m') GROUP BY d.id, d.name;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下本季度各部门的订单数",
+    "output": "SELECT d.name AS dept_name, COUNT(o.id) AS order_count FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE()) GROUP BY d.id, d.name;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下今年各部门的订单数",
+    "output": "SELECT d.name AS dept_name, COUNT(o.id) AS order_count FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE YEAR(o.created_at) = YEAR(CURDATE()) GROUP BY d.id, d.name;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下最近30天各部门的订单数",
+    "output": "SELECT d.name AS dept_name, COUNT(o.id) AS order_count FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) GROUP BY d.id, d.name;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "本季度新增了多少客户",
+    "output": "SELECT COUNT(*) AS new_customers FROM customers WHERE registered_at >= QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE());",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "最近30天新增了多少客户",
+    "output": "SELECT COUNT(*) AS new_customers FROM customers WHERE registered_at >= o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月的平均订单金额",
+    "output": "SELECT AVG(total_amount) AS avg_amount FROM orders o WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m');",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下本季度的平均订单金额",
+    "output": "SELECT AVG(total_amount) AS avg_amount FROM orders o WHERE QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE());",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下今年的平均订单金额",
+    "output": "SELECT AVG(total_amount) AS avg_amount FROM orders o WHERE YEAR(o.created_at) = YEAR(CURDATE());",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下最近30天的平均订单金额",
+    "output": "SELECT AVG(total_amount) AS avg_amount FROM orders o WHERE o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "上个月退货的订单有多少",
+    "output": "SELECT COUNT(*) AS return_count FROM orders o WHERE status = '已退货' AND DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m');",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "本季度退货的订单有多少",
+    "output": "SELECT COUNT(*) AS return_count FROM orders o WHERE status = '已退货' AND QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE());",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "今年退货的订单有多少",
+    "output": "SELECT COUNT(*) AS return_count FROM orders o WHERE status = '已退货' AND YEAR(o.created_at) = YEAR(CURDATE());",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "最近30天退货的订单有多少",
+    "output": "SELECT COUNT(*) AS return_count FROM orders o WHERE status = '已退货' AND o.created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下上个月销售额最高的部门",
+    "output": "SELECT d.name AS dept_name, SUM(o.total_amount) AS total_sales FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE DATE_FORMAT(o.created_at, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), '%Y-%m') GROUP BY d.id, d.name ORDER BY total_sales DESC LIMIT 1;",
+    "category": "nl2sql"
+  },
+  {
+    "instruction": "将自然语言问题转换为MySQL查询语句。",
+    "input": "查一下本季度销售额最高的部门",
+    "output": "SELECT d.name AS dept_name, SUM(o.total_amount) AS total_sales FROM orders o JOIN employees e ON o.customer_id = e.id JOIN departments d ON e.department_id = d.id WHERE QUARTER(o.created_at) = QUARTER(CURDATE()) AND YEAR(o.created_at) = YEAR(CURDATE()) GROUP BY d.id, d.name ORDER BY total_sales DESC LIMIT 1;",
+    "category": "nl2sql"
+  }
+]

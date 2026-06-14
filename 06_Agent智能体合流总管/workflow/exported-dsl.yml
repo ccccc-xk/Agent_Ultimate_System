@@ -1,0 +1,236 @@
+data: "app:\n  description: 全能型AI智能企业客服总管，支持意图识别、工具路由、知识库问答、智能派单、多轮对话\n  icon: \U0001F916\
+  \n  icon_background: '#FFEAD5'\n  icon_type: emoji\n  mode: advanced-chat\n  name:\
+  \ Agent智能客服总管\n  use_icon_as_answer_icon: false\ndependencies:\n- current_identifier:\
+  \ null\n  type: marketplace\n  value:\n    marketplace_plugin_unique_identifier:\
+  \ langgenius/mimo:0.0.6@5cab5c4e0e69fc04a46c67e6d6545d45299d997fd73ede3477c2db6d2794d9bd\n\
+  \    version: null\nkind: app\nversion: 0.6.0\nworkflow:\n  conversation_variables:\
+  \ []\n  environment_variables: []\n  features:\n    file_upload:\n      allowed_file_extensions:\n\
+  \      - .txt\n      - .pdf\n      - .md\n      - .docx\n      allowed_file_types:\n\
+  \      - document\n      allowed_file_upload_methods:\n      - local_file\n    \
+  \  enabled: false\n      fileUploadConfig:\n        audio_file_size_limit: 50\n\
+  \        batch_count_limit: 5\n        file_size_limit: 15\n        image_file_size_limit:\
+  \ 10\n        video_file_size_limit: 100\n        workflow_file_upload_limit: 10\n\
+  \      image:\n        enabled: false\n        number_limits: 3\n        transfer_methods:\n\
+  \        - local_file\n      number_limits: 5\n    opening_statement: '您好！我是AI智能客服总管，可以帮您：\n\
+  \n\n      1. 查询财务报表和用户信息\n\n      2. 查询物流和业务数据\n\n      3. 报修/投诉自动派单\n\n      4.\
+  \ 咨询公司规章政策\n\n\n      请问有什么可以帮您的？'\n    retriever_resource:\n      enabled: true\n\
+  \    sensitive_word_avoidance:\n      enabled: false\n    speech_to_text:\n    \
+  \  enabled: false\n    suggested_questions:\n    - 帮我查一下3月份的财务数据\n    - 员工年假有几天？\n\
+  \    - 3号楼202房间电风扇坏了\n    suggested_questions_after_answer:\n      enabled: true\n\
+  \    text_to_speech:\n      enabled: false\n      language: ''\n      voice: ''\n\
+  \  graph:\n    edges:\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ start\n        targetType: llm\n      id: start-to-intent\n      source: start\n\
+  \      sourceHandle: source\n      target: intent-classifier\n      targetHandle:\
+  \ target\n      type: custom\n    - data:\n        isInIteration: false\n      \
+  \  sourceType: llm\n        targetType: if-else\n      id: intent-to-router\n  \
+  \    source: intent-classifier\n      sourceHandle: source\n      target: intent-router\n\
+  \      targetHandle: target\n      type: custom\n    - data:\n        isInIteration:\
+  \ false\n        sourceType: if-else\n        targetHandle: target\n        targetType:\
+  \ llm\n      id: router-to-param-check\n      source: intent-router\n      sourceHandle:\
+  \ 'true'\n      target: param-checker\n      type: custom\n    - data:\n       \
+  \ isInIteration: false\n        sourceType: if-else\n        targetHandle: target\n\
+  \        targetType: tool\n      id: router-to-dispatch\n      source: intent-router\n\
+  \      sourceHandle: true_2\n      target: dispatch-tool\n      type: custom\n \
+  \   - data:\n        isInIteration: false\n        sourceType: if-else\n       \
+  \ targetHandle: target\n        targetType: tool\n      id: router-to-knowledge\n\
+  \      source: intent-router\n      sourceHandle: true_3\n      target: knowledge-tool\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ if-else\n        targetHandle: target\n        targetType: llm\n      id: router-to-human\n\
+  \      source: intent-router\n      sourceHandle: true_4\n      target: human-handoff\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ if-else\n        targetHandle: target\n        targetType: llm\n      id: router-to-fallback\n\
+  \      source: intent-router\n      sourceHandle: false\n      target: fallback-reply\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ llm\n        targetHandle: target\n        targetType: answer\n      id: dispatch-format-to-answer\n\
+  \      source: dispatch-formatter\n      sourceHandle: source\n      target: final-answer\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ llm\n        targetHandle: target\n        targetType: answer\n      id: knowledge-format-to-answer\n\
+  \      source: knowledge-formatter\n      sourceHandle: source\n      target: final-answer\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ llm\n        targetHandle: target\n        targetType: answer\n      id: human-to-answer\n\
+  \      source: human-handoff\n      sourceHandle: source\n      target: final-answer\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ llm\n        targetHandle: target\n        targetType: answer\n      id: fallback-to-answer\n\
+  \      source: fallback-reply\n      sourceHandle: source\n      target: final-answer\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ llm\n        targetHandle: target\n        targetType: if-else\n      id: param-check-to-decision\n\
+  \      source: param-checker\n      sourceHandle: source\n      target: param-decision\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ if-else\n        targetHandle: target\n        targetType: llm\n      id: param-decision-to-ask\n\
+  \      source: param-decision\n      sourceHandle: 'true'\n      target: ask-params\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ if-else\n        targetHandle: target\n        targetType: tool\n      id: param-decision-to-query-tool\n\
+  \      source: param-decision\n      sourceHandle: false\n      target: query-tool\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ tool\n        targetHandle: target\n        targetType: llm\n      id: query-tool-to-formatter\n\
+  \      source: query-tool\n      sourceHandle: source\n      target: query-formatter\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ llm\n        targetHandle: target\n        targetType: answer\n      id: query-format-to-answer\n\
+  \      source: query-formatter\n      sourceHandle: source\n      target: final-answer\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ tool\n        targetHandle: target\n        targetType: llm\n      id: dispatch-tool-to-formatter\n\
+  \      source: dispatch-tool\n      sourceHandle: source\n      target: dispatch-formatter\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ tool\n        targetHandle: target\n        targetType: llm\n      id: knowledge-tool-to-formatter\n\
+  \      source: knowledge-tool\n      sourceHandle: source\n      target: knowledge-formatter\n\
+  \      type: custom\n    - data:\n        isInIteration: false\n        sourceType:\
+  \ llm\n        targetHandle: target\n        targetType: answer\n      id: ask-params-to-answer\n\
+  \      source: ask-params\n      sourceHandle: source\n      target: final-answer\n\
+  \      type: custom\n    nodes:\n    - data:\n        desc: ''\n        selected:\
+  \ false\n        title: 开始\n        type: start\n        variables: []\n      height:\
+  \ 90\n      id: start\n      position:\n        x: 80\n        y: 300\n      positionAbsolute:\n\
+  \        x: 80\n        y: 300\n      type: custom\n      width: 244\n    - data:\n\
+  \        context:\n          enabled: false\n          variable_selector: []\n \
+  \       desc: 分析用户输入，判断意图分类\n        model:\n          completion_params:\n    \
+  \        max_tokens: 512\n            temperature: 0.1\n          mode: chat\n \
+  \         name: mimo-v2.5-pro\n          provider: langgenius/mimo/mimo\n      \
+  \  prompt_template:\n        - id: intent-prompt\n          role: system\n     \
+  \     text: '你是一个意图分类器。分析用户的输入，判断属于以下哪个类别，只输出类别名称：\n\n\n            1. tool_query\
+  \ — 用户想查询/修改业务数据（财务报表、用户信息、物流状态等），或描述了需要查数据的场景\n\n            2. tool_dispatch —\
+  \ 用户描述了报修/投诉/故障/损坏场景，需要派人处理\n\n            3. knowledge — 用户咨询公司规章政策、制度流程、员工福利等知识性问题\n\
+  \n            4. human_handoff — 用户明确要求人工服务、投诉升级、或表达强烈不满\n\n\n            注意：\n\n\
+  \            - 如果用户提到具体设备/设施损坏、报修、投诉，归类为 tool_dispatch\n\n            - 如果用户问\"\
+  年假几天\"\"退货流程\"等制度问题，归类为 knowledge\n\n            - 如果用户要查具体数据（月份、报表、单号），归类为 tool_query\n\
+  \n            - 只输出一个类别名称，不要解释\n\n            '\n        - id: intent-user\n   \
+  \       role: user\n          text: '{{#sys.query#}}'\n        title: 意图识别\n   \
+  \     type: llm\n        vision:\n          enabled: false\n      height: 120\n\
+  \      id: intent-classifier\n      position:\n        x: 400\n        y: 280\n\
+  \      type: custom\n      width: 244\n    - data:\n        conditions:\n      \
+  \  - comparison_operator: contains\n          id: cond-query\n          value: tool_query\n\
+  \          variable_selector:\n          - intent-classifier\n          - text\n\
+  \        - comparison_operator: contains\n          id: cond-dispatch\n        \
+  \  value: tool_dispatch\n          variable_selector:\n          - intent-classifier\n\
+  \          - text\n        - comparison_operator: contains\n          id: cond-knowledge\n\
+  \          value: knowledge\n          variable_selector:\n          - intent-classifier\n\
+  \          - text\n        - comparison_operator: contains\n          id: cond-human\n\
+  \          value: human_handoff\n          variable_selector:\n          - intent-classifier\n\
+  \          - text\n        desc: 根据意图分类结果路由\n        title: 意图路由\n        type:\
+  \ if-else\n      height: 250\n      id: intent-router\n      position:\n       \
+  \ x: 720\n        y: 260\n      type: custom\n      width: 244\n    - data:\n  \
+  \      context:\n          enabled: false\n          variable_selector: []\n   \
+  \     desc: 检查用户输入是否包含必要参数\n        model:\n          completion_params:\n     \
+  \       max_tokens: 256\n            temperature: 0.1\n          mode: chat\n  \
+  \        name: mimo-v2.5-pro\n          provider: langgenius/mimo/mimo\n       \
+  \ prompt_template:\n        - id: check-sys\n          role: system\n          text:\
+  \ '分析用户的需求，判断是否已经提供了查询所需的参数。\n\n\n            规则：\n\n            - 如果用户要查财务数据但没说月份\
+  \ → 输出：缺少月份\n\n            - 如果用户要查用户信息但没说关键词 → 输出：缺少关键词\n\n            - 如果用户要查物流但没提供单号\
+  \ → 输出：缺少单号\n\n            - 如果参数齐全 → 输出：齐全\n\n\n            只输出\"齐全\"或\"缺少xxx\"\
+  \n\n            '\n        - id: check-user\n          role: user\n          text:\
+  \ '{{#sys.query#}}'\n        title: 参数检查\n        type: llm\n        vision:\n \
+  \         enabled: false\n      height: 120\n      id: param-checker\n      position:\n\
+  \        x: 1040\n        y: 100\n      type: custom\n      width: 244\n    - data:\n\
+  \        conditions:\n        - comparison_operator: not contains\n          id:\
+  \ cond-has-params\n          value: 齐全\n          variable_selector:\n         \
+  \ - param-checker\n          - text\n        desc: 判断参数是否齐全\n        title: 参数判断\n\
+  \        type: if-else\n      height: 150\n      id: param-decision\n      position:\n\
+  \        x: 1360\n        y: 100\n      type: custom\n      width: 244\n    - data:\n\
+  \        context:\n          enabled: false\n          variable_selector: []\n \
+  \       desc: 输出追问话术\n        model:\n          completion_params:\n           \
+  \ max_tokens: 256\n            temperature: 0.7\n          mode: chat\n        \
+  \  name: mimo-v2.5-pro\n          provider: langgenius/mimo/mimo\n        prompt_template:\n\
+  \        - id: ask-sys\n          role: system\n          text: '你是一个友善的客服助手。根据系统提示中的缺少参数信息，生成一段礼貌的追问话术。\n\
+  \n            要求：语气友好、简洁、专业。如果提示缺少月份，就问月份；缺少单号就问单号；缺少关键词就问关键词。\n\n            '\n\
+  \        - id: ask-context\n          role: user\n          text: '系统提示: {{#param-checker.text#}}\n\
+  \n            用户原始问题: {{#sys.query#}}'\n        title: 追问参数\n        type: llm\n\
+  \        vision:\n          enabled: false\n      height: 120\n      id: ask-params\n\
+  \      position:\n        x: 1680\n        y: 100\n      type: custom\n      width:\
+  \ 244\n    - data:\n        agent_mode:\n          enabled: false\n        desc:\
+  \ 调用数据查询工具\n        prompt_template:\n        - id: qt-sys\n          role: system\n\
+  \          text: '你是数据查询助手。调用合适的工具查询用户需要的数据。\n\n            '\n        - id: qt-user\n\
+  \          role: user\n          text: '{{#sys.query#}}'\n        strategy: function_call\n\
+  \        title: 数据查询\n        tool_configurations:\n          project1_enterprise_api__finance_ai_summary:\n\
+  \            enabled: true\n          project1_enterprise_api__finance_report_query:\n\
+  \            enabled: true\n          project1_enterprise_api__user_search:\n  \
+  \          enabled: true\n          project2_logistics_api__nlp_natural_query:\n\
+  \            enabled: true\n        tools:\n        - dataset: null\n          enabled:\
+  \ true\n          provider_id: project1_enterprise_api\n          provider_type:\
+  \ api\n          tool_name: finance_report_query\n        - dataset: null\n    \
+  \      enabled: true\n          provider_id: project1_enterprise_api\n         \
+  \ provider_type: api\n          tool_name: finance_ai_summary\n        - dataset:\
+  \ null\n          enabled: true\n          provider_id: project1_enterprise_api\n\
+  \          provider_type: api\n          tool_name: user_search\n        - dataset:\
+  \ null\n          enabled: true\n          provider_id: project2_logistics_api\n\
+  \          provider_type: api\n          tool_name: nlp_natural_query\n        type:\
+  \ tool\n      height: 120\n      id: query-tool\n      position:\n        x: 1680\n\
+  \        y: 250\n      type: custom\n      width: 244\n    - data:\n        desc:\
+  \ 将查询结果格式化为自然语言\n        model:\n          completion_params:\n            max_tokens:\
+  \ 1024\n            temperature: 0.5\n          mode: chat\n          name: mimo-v2.5-pro\n\
+  \          provider: langgenius/mimo/mimo\n        prompt_template:\n        - id:\
+  \ fmt-sys\n          role: system\n          text: '你是数据格式化助手。将工具返回的JSON数据转换为用户友好的自然语言回答。\n\
+  \n            要求：\n\n            1. 关键数据（数字、日期、单号）用**加粗**显示\n\n            2. 结构清晰，重要信息优先\n\
+  \n            3. 如果数据为空，友好告知用户\n\n            4. 如果返回错误，告知用户服务暂时不可用\n\n        \
+  \    '\n        - id: fmt-user\n          role: user\n          text: '用户问题: {{#sys.query#}}\n\
+  \n            工具返回数据:\n\n            {{#query-tool.text#}}\n\n            '\n  \
+  \      title: 格式化查询结果\n        type: llm\n        vision:\n          enabled: false\n\
+  \      height: 120\n      id: query-formatter\n      position:\n        x: 2000\n\
+  \        y: 250\n      type: custom\n      width: 244\n    - data:\n        agent_mode:\n\
+  \          enabled: false\n        desc: 调用智能派单工具\n        prompt_template:\n  \
+  \      - id: dp-sys\n          role: system\n          text: '将用户的报修/投诉描述传递给派单工具。\n\
+  \n            '\n        - id: dp-user\n          role: user\n          text: '{{#sys.query#}}'\n\
+  \        strategy: function_call\n        title: 智能派单\n        tool_configurations:\n\
+  \          project2_logistics_api__smart_dispatch:\n            enabled: true\n\
+  \        tools:\n        - dataset: null\n          enabled: true\n          provider_id:\
+  \ project2_logistics_api\n          provider_type: api\n          tool_name: smart_dispatch\n\
+  \        type: tool\n      height: 120\n      id: dispatch-tool\n      position:\n\
+  \        x: 1040\n        y: 450\n      type: custom\n      width: 244\n    - data:\n\
+  \        context:\n          enabled: false\n          variable_selector: []\n \
+  \       desc: 将工单信息格式化为友好回答\n        model:\n          completion_params:\n    \
+  \        max_tokens: 512\n            temperature: 0.5\n          mode: chat\n \
+  \         name: mimo-v2.5-pro\n          provider: langgenius/mimo/mimo\n      \
+  \  prompt_template:\n        - id: dpfmt-sys\n          role: system\n         \
+  \ text: '你是工单处理助手。将派单工具返回的工单信息格式化为用户友好的回答。\n\n            包含：工单号、处理优先级、状态、创建时间。语气专业且有同理心。\n\
+  \n            关键信息用**加粗**显示。\n\n            '\n        - id: dpfmt-user\n      \
+  \    role: user\n          text: '用户问题: {{#sys.query#}}\n\n            派单结果: {{#dispatch-tool.text#}}\n\
+  \n            '\n        title: 格式化派单结果\n        type: llm\n        vision:\n  \
+  \        enabled: false\n      height: 120\n      id: dispatch-formatter\n     \
+  \ position:\n        x: 1360\n        y: 450\n      type: custom\n      width: 244\n\
+  \    - data:\n        agent_mode:\n          enabled: false\n        desc: 调用知识库检索\n\
+  \        prompt_template:\n        - id: kb-sys\n          role: system\n      \
+  \    text: '查询企业知识库，获取相关政策和制度信息。\n\n            '\n        - id: kb-user\n     \
+  \     role: user\n          text: '{{#sys.query#}}'\n        strategy: function_call\n\
+  \        title: 知识库检索\n        tool_configurations:\n          project5_rag_api__rag_knowledge_query:\n\
+  \            enabled: true\n        tools:\n        - dataset: null\n          enabled:\
+  \ true\n          provider_id: project5_rag_api\n          provider_type: api\n\
+  \          tool_name: rag_knowledge_query\n        type: tool\n      height: 120\n\
+  \      id: knowledge-tool\n      position:\n        x: 1040\n        y: 600\n  \
+  \    type: custom\n      width: 244\n    - data:\n        context:\n          enabled:\
+  \ false\n          variable_selector: []\n        desc: 基于知识库结果生成回答\n        model:\n\
+  \          completion_params:\n            max_tokens: 1024\n            temperature:\
+  \ 0.5\n          mode: chat\n          name: mimo-v2.5-pro\n          provider:\
+  \ langgenius/mimo/mimo\n        prompt_template:\n        - id: kbfmt-sys\n    \
+  \      role: system\n          text: '你是企业政策咨询助手。根据知识库检索结果回答用户问题。\n\n          \
+  \  要求：\n\n            1. 严格基于检索到的内容回答，不要编造信息\n\n            2. 如果检索结果中没有相关内容，如实告知\n\
+  \n            3. 引用来源文档名称\n\n            4. 关键条款用**加粗**显示\n\n            '\n   \
+  \     - id: kbfmt-user\n          role: user\n          text: '用户问题: {{#sys.query#}}\n\
+  \n            知识库检索结果: {{#knowledge-tool.text#}}\n\n            '\n        title:\
+  \ 格式化知识库回答\n        type: llm\n        vision:\n          enabled: false\n     \
+  \ height: 120\n      id: knowledge-formatter\n      position:\n        x: 1360\n\
+  \        y: 600\n      type: custom\n      width: 244\n    - data:\n        context:\n\
+  \          enabled: false\n          variable_selector: []\n        desc: 输出人工转接话术\n\
+  \        model:\n          completion_params:\n            max_tokens: 256\n   \
+  \         temperature: 0.7\n          mode: chat\n          name: mimo-v2.5-pro\n\
+  \          provider: langgenius/mimo/mimo\n        prompt_template:\n        - id:\
+  \ human-sys\n          role: system\n          text: '你是客服助手。用户需要人工服务，请输出一段专业的转人工话术，包含：\n\
+  \n            1. 对用户情绪的理解和安抚\n\n            2. 告知正在转接人工客服\n\n            3. 预计等待时间（说1-2分钟）\n\
+  \n            语气要温暖专业。\n\n            '\n        - id: human-user\n          role:\
+  \ user\n          text: '{{#sys.query#}}'\n        title: 人工转接\n        type: llm\n\
+  \        vision:\n          enabled: false\n      height: 120\n      id: human-handoff\n\
+  \      position:\n        x: 1040\n        y: 780\n      type: custom\n      width:\
+  \ 244\n    - data:\n        context:\n          enabled: false\n          variable_selector:\
+  \ []\n        desc: 无法识别意图时的兜底回复\n        model:\n          completion_params:\n\
+  \            max_tokens: 256\n            temperature: 0.7\n          mode: chat\n\
+  \          name: mimo-v2.5-pro\n          provider: langgenius/mimo/mimo\n     \
+  \   prompt_template:\n        - id: fb-sys\n          role: system\n          text:\
+  \ '你是友善的客服助手。用户的问题没有被正确识别。请礼貌地引导用户重新描述需求，并说明您能提供的服务范围：\n\n            1. 查询财务/用户/物流数据\n\
+  \n            2. 报修/投诉派单\n\n            3. 咨询公司规章制度\n\n            4. 转人工客服\n\n\
+  \            '\n        - id: fb-user\n          role: user\n          text: '{{#sys.query#}}'\n\
+  \        title: 兜底回复\n        type: llm\n        vision:\n          enabled: false\n\
+  \      height: 120\n      id: fallback-reply\n      position:\n        x: 1040\n\
+  \        y: 930\n      type: custom\n      width: 244\n    - data:\n        answer:\
+  \ '{{#query-formatter.text#}}\n\n\n          {{#dispatch-formatter.text#}}\n\n\n\
+  \          {{#knowledge-formatter.text#}}\n\n\n          {{#human-handoff.text#}}\n\
+  \n\n          {{#fallback-reply.text#}}\n\n\n          {{#ask-params.text#}}'\n\
+  \        desc: 最终输出节点\n        title: 最终回答\n        type: answer\n        variables:\
+  \ []\n      height: 120\n      id: final-answer\n      position:\n        x: 2320\n\
+  \        y: 400\n      type: custom\n      width: 244\n  rag_pipeline_variables:\
+  \ []\n"
